@@ -18,7 +18,7 @@ class Pea {
     let color: CGColor
     
     init() {
-        loc = [PK.width * 0.5, PK.height * 0.5]
+        loc = [PK.width, PK.height]
         ploc = [0, 0]
         vel = [0, 0]
         acc = [0, 0]
@@ -45,8 +45,8 @@ class Pea {
     }
     
     func bounce() {
-        if loc.x > PK.width || loc.x < 0 {vel.x *= -1}
-        if loc.y > PK.height || loc.y < 0 {vel.y *= -1}
+        if loc.x > PK.width2x || loc.x < 0 {vel.x *= -1}
+        if loc.y > PK.height2x || loc.y < 0 {vel.y *= -1}
     }
     
     func draw(to context: CGContext) {

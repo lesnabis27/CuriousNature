@@ -22,7 +22,7 @@ class Canvas: NSView {
     
     override func draw(_ rect: CGRect) {
         let displayContext = NSGraphicsContext.current?.cgContext
-        displayContext!.draw(image!, in: bounds)
+        displayContext!.draw(image!, in: (NSScreen.main?.frame)!)
     }
     
 }

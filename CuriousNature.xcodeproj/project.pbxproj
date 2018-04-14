@@ -12,6 +12,7 @@
 		220C770B20793EDA005E2242 /* Flock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C770A20793EDA005E2242 /* Flock.swift */; };
 		220C770E207ECB83005E2242 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C770D207ECB83005E2242 /* CoreGraphics.framework */; };
 		220C7710207FFC9A005E2242 /* ProcessKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C770F207FFC9A005E2242 /* ProcessKit.swift */; };
+		220C77122082598B005E2242 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C77112082598B005E2242 /* Extensions.swift */; };
 		221244F120792CF3006DDFB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221244F020792CF3006DDFB1 /* AppDelegate.swift */; };
 		221244F320792CF3006DDFB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221244F220792CF3006DDFB1 /* ViewController.swift */; };
 		221244F520792CF4006DDFB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 221244F420792CF4006DDFB1 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		220C770A20793EDA005E2242 /* Flock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flock.swift; sourceTree = "<group>"; };
 		220C770D207ECB83005E2242 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		220C770F207FFC9A005E2242 /* ProcessKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessKit.swift; sourceTree = "<group>"; };
+		220C77112082598B005E2242 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		221244ED20792CF3006DDFB1 /* CuriousNature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CuriousNature.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		221244F020792CF3006DDFB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		221244F220792CF3006DDFB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				220C770820793EC9005E2242 /* Pea.swift */,
 				2212450E20792DAE006DDFB1 /* Vector.swift */,
 				220C770F207FFC9A005E2242 /* ProcessKit.swift */,
+				220C77112082598B005E2242 /* Extensions.swift */,
 				221244F420792CF4006DDFB1 /* Assets.xcassets */,
 				221244F620792CF4006DDFB1 /* Main.storyboard */,
 				221244F920792CF4006DDFB1 /* Info.plist */,
@@ -172,6 +175,11 @@
 				TargetAttributes = {
 					221244EC20792CF3006DDFB1 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					221244FE20792CF4006DDFB1 = {
 						CreatedOnToolsVersion = 9.3;
@@ -225,6 +233,7 @@
 				220C770920793EC9005E2242 /* Pea.swift in Sources */,
 				220C7710207FFC9A005E2242 /* ProcessKit.swift in Sources */,
 				221244F320792CF3006DDFB1 /* ViewController.swift in Sources */,
+				220C77122082598B005E2242 /* Extensions.swift in Sources */,
 				2212450F20792DAE006DDFB1 /* Vector.swift in Sources */,
 				221244F120792CF3006DDFB1 /* AppDelegate.swift in Sources */,
 				220C770720793794005E2242 /* Canvas.swift in Sources */,

@@ -9,11 +9,31 @@
 import Cocoa
 
 class ViewController: NSViewController {
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var canvas: Canvas!
+    
+    // MARK: - IBActions
+    @IBAction func exportMenuItemSelected(_ sender: Any) {
+        showExportPanel()
+    }
+    @IBAction func startMenuItemSelected(_ sender: Any) {
+        if timer.isValid {
+            stopTimer()
+        } else {
+            startTimer()
+        }
+    }
+    @IBAction func clearMenuItemSelected(_ sender: Any) {
+        clearCanvas()
+    }
+    
+    // MARK: - Properties
     var context: CGContext?
     var timer = Timer()
-    var flock = Flock(with: 12)
+    var flock = Flock(with: 300)
 
+    // MARK: - View stuff
     override func viewWillAppear() {
         super.viewWillAppear()
         
@@ -29,7 +49,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        scheduledTimerWithTimeInterval()
+        startTimer()
     }
 
     override var representedObject: Any? {
@@ -37,6 +57,7 @@ class ViewController: NSViewController {
         }
     }
     
+    // MARK: - Setup
     // Analogous to Processing's setup
     // Code to be executed on startup
     func setup() {
@@ -45,6 +66,7 @@ class ViewController: NSViewController {
         canvas.update(from: context)
     }
     
+    // MARK: - Update
     // Analogous to Processing's draw
     // Loops for the duration of the program
     @objc func update(_: Timer) {
@@ -52,28 +74,56 @@ class ViewController: NSViewController {
         canvas.update(from: context)
     }
     
+    // MARK: - Context
     func createContext() {
         context = CGContext(
             data: nil,
-            width: Int((NSScreen.main?.frame.width)!),
-            height: Int((NSScreen.main?.frame.height)!),
+            width: Int(PK.width2x),
+            height: Int(PK.height2x),
             bitsPerComponent: 8,
             bytesPerRow: 0,
             space: CGColorSpaceCreateDeviceRGB(),
             bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
-        context?.scaleBy(x: 1.0, y: 1.0)
-    }
-
-    func background() {
-        
     }
     
     func releaseContext() {
         context = nil
     }
     
-    func scheduledTimerWithTimeInterval() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: self.update)
+    func clearCanvas() {
+        releaseContext()
+        createContext()
+        PK.background(in: context!, gray: 0.05)
+        canvas.update(from: context)
+    }
+    
+    // MARK: - Saving and opening
+    func showExportPanel() {
+        guard let window = view.window else {return}
+        let panel = NSSavePanel()
+        panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
+        panel.nameFieldStringValue = "frame.png"
+        panel.beginSheetModal(for: window) { (result) in
+            if result == NSApplication.ModalResponse.OK,
+                let url = panel.url {
+                let cgimage = self.context!.makeImage()
+                let nsimage = NSImage(cgImage: cgimage!, size: NSZeroSize)
+                nsimage.pngWrite(to: url, options: .withoutOverwriting)
+            }
+        }
+    }
+    
+    // MARK: - Timer
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true, block: self.update)
+        NotificationCenter.default.post(name: .timerStart, object: nil)
+        //startMenuItem.title = "Stop"
+    }
+    
+    func stopTimer() {
+        timer.invalidate()
+        NotificationCenter.default.post(name: .timerStop, object: nil)
+        //startMenuItem.title = "Stop"
     }
 
 }

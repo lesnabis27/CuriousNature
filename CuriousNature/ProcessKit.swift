@@ -14,18 +14,26 @@ struct PK {
         return Double(NSScreen.main!.frame.width)
     }
     
+    public static var width2x: Double {
+        return width * 2
+    }
+    
     public static var height: Double {
         return Double(NSScreen.main!.frame.height)
     }
     
+    public static var height2x: Double {
+        return height * 2
+    }
+    
     public static func background(in context: CGContext, red: CGFloat, green: CGFloat, blue: CGFloat) {
         context.setFillColor(red: red, green: green, blue: blue, alpha: 1.0)
-        context.fill(CGRect.init(x: 0, y: 0, width: width, height: height))
+        context.fill(CGRect.init(x: 0, y: 0, width: width2x, height: height2x))
     }
     
     public static func background(in context: CGContext, gray: CGFloat) {
         context.setFillColor(gray: gray, alpha: 1.0)
-        context.fill(CGRect.init(x: 0, y: 0, width: width, height: height))
+        context.fill(CGRect.init(x: 0, y: 0, width: width2x, height: height2x))
     }
     
     public static func line(from begin: CGPoint, to end: CGPoint, in context: CGContext) {
