@@ -19,6 +19,7 @@
 		221244F820792CF4006DDFB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221244F620792CF4006DDFB1 /* Main.storyboard */; };
 		2212450420792CF4006DDFB1 /* CuriousNatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450320792CF4006DDFB1 /* CuriousNatureTests.swift */; };
 		2212450F20792DAE006DDFB1 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450E20792DAE006DDFB1 /* Vector.swift */; };
+		22F14063208EC075006FBD4E /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F14062208EC075006FBD4E /* PrefsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		2212450320792CF4006DDFB1 /* CuriousNatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriousNatureTests.swift; sourceTree = "<group>"; };
 		2212450520792CF4006DDFB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2212450E20792DAE006DDFB1 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		22F14062208EC075006FBD4E /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				221244F020792CF3006DDFB1 /* AppDelegate.swift */,
+				22F14062208EC075006FBD4E /* PrefsViewController.swift */,
 				221244F220792CF3006DDFB1 /* ViewController.swift */,
 				220C770620793794005E2242 /* Canvas.swift */,
 				220C770A20793EDA005E2242 /* Flock.swift */,
@@ -231,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				220C770920793EC9005E2242 /* Pea.swift in Sources */,
+				22F14063208EC075006FBD4E /* PrefsViewController.swift in Sources */,
 				220C7710207FFC9A005E2242 /* ProcessKit.swift in Sources */,
 				221244F320792CF3006DDFB1 /* ViewController.swift in Sources */,
 				220C77122082598B005E2242 /* Extensions.swift in Sources */,

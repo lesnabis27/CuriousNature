@@ -23,7 +23,7 @@ class Pea {
         vel = [0, 0]
         acc = [0, 0]
         mass = 1.0
-        color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.6)
+        color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.2)
     }
     
     init(atX x: Double, andY y: Double) {
@@ -32,7 +32,7 @@ class Pea {
         vel = [0, 0]
         acc = [0, 0]
         mass = 1.0
-        color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.6)
+        color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.2)
     }
     
     func randomMotion() {

@@ -18,9 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-    
-    // MARK: - Menu Outlets
-    @IBOutlet weak var startMenuItem: NSMenuItem!
 
 }
 

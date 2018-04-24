@@ -22,7 +22,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="wsx-sX-pAl" kind="show" id="4ZZ-cg-3Lm"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -111,7 +115,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Process" id="p1g-QP-VlQ">
                                     <items>
-                                        <menuItem title="Start" keyEquivalent="r" id="Jhb-8H-vTv">
+                                        <menuItem title="Run" keyEquivalent="r" id="Jhb-8H-vTv">
                                             <connections>
                                                 <action selector="startMenuItemSelected:" target="Ady-hI-5gd" id="gjb-tf-oJk"/>
                                             </connections>
@@ -209,7 +213,7 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="ang-zM-WZn"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="300" y="-60"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -231,6 +235,65 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Bzy-TR-83h">
+            <objects>
+                <windowController id="wsx-sX-pAl" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="62s-lJ-GJg">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <rect key="contentRect" x="369" y="351" width="600" height="400"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+                        <connections>
+                            <outlet property="delegate" destination="wsx-sX-pAl" id="VVA-wU-E73"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="Uk2-oF-w7H" kind="relationship" relationship="window.shadowedContentViewController" id="7IH-oO-L0n"/>
+                    </connections>
+                </windowController>
+                <customObject id="orE-If-k3k" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="635" y="250"/>
+        </scene>
+        <!--Prefs View Controller-->
+        <scene sceneID="zJV-GR-C7l">
+            <objects>
+                <viewController id="Uk2-oF-w7H" customClass="PrefsViewController" customModule="CuriousNature" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="jDs-9C-HJu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="dvx-3k-VUu">
+                                <rect key="frame" x="13" y="10" width="574" height="376"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Behavior" identifier="" id="ekp-L6-5gA">
+                                        <view key="view" id="iiJ-DG-j34">
+                                            <rect key="frame" x="10" y="33" width="554" height="330"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Style" identifier="" id="Mzj-uK-O3p">
+                                        <view key="view" id="h62-8o-Uhb">
+                                            <rect key="frame" x="10" y="33" width="554" height="330"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="dvx-3k-VUu" firstAttribute="leading" secondItem="jDs-9C-HJu" secondAttribute="leading" constant="20" id="Hb1-ZD-evb"/>
+                            <constraint firstAttribute="trailing" secondItem="dvx-3k-VUu" secondAttribute="trailing" constant="20" id="miS-BW-VMk"/>
+                            <constraint firstAttribute="bottom" secondItem="dvx-3k-VUu" secondAttribute="bottom" constant="20" id="t5A-CT-3D5"/>
+                            <constraint firstItem="dvx-3k-VUu" firstAttribute="top" secondItem="jDs-9C-HJu" secondAttribute="top" constant="20" id="ywC-hp-gu6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="SVX-LC-oAj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="635" y="720"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">

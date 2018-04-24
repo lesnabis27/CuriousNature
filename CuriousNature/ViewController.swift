@@ -116,14 +116,14 @@ class ViewController: NSViewController {
     // MARK: - Timer
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true, block: self.update)
-        NotificationCenter.default.post(name: .timerStart, object: nil)
-        //startMenuItem.title = "Stop"
+        //NotificationCenter.default.post(name: .timerStart, object: nil)
+        //if startMenuItem != nil {startMenuItem.title = "Stop"}
     }
     
     func stopTimer() {
         timer.invalidate()
-        NotificationCenter.default.post(name: .timerStop, object: nil)
-        //startMenuItem.title = "Stop"
+        //NotificationCenter.default.post(name: .timerStop, object: nil)
+        //if startMenuItem != nil {startMenuItem.title = "Start"}
     }
 
 }
