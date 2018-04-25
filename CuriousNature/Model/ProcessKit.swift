@@ -6,6 +6,8 @@
 //  Copyright © 2018 Sam Richardson. All rights reserved.
 //
 
+// ProcessKit (PK) is full of convenience functions and properties to ease drawing to the screen
+
 import Cocoa
 
 struct PK {

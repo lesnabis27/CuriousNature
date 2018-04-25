@@ -13,9 +13,14 @@
 import Cocoa
 
 class Pea {
+    
+    // MARK: - Properties
+    
     var loc, ploc, vel, acc: Vector
     let mass: Double
     let color: CGColor
+    
+    // MARK: - Initializers
     
     init() {
         loc = [PK.width, PK.height]
@@ -35,6 +40,8 @@ class Pea {
         color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.2)
     }
     
+    // MARK: - Motion
+    
     func randomMotion() {
         acc = acc.random2D()
         vel += acc
@@ -48,6 +55,47 @@ class Pea {
         if loc.x > PK.width2x || loc.x < 0 {vel.x *= -1}
         if loc.y > PK.height2x || loc.y < 0 {vel.y *= -1}
     }
+    
+    // MARK: - Interaction
+    
+    func applyForce(force: Vector) {
+        acc = acc + force
+    }
+    
+    func flock(_ peas: [Pea]) {
+        var sep = separate(peas)
+        var ali = align(peas)
+        var coh = cohesion(peas)
+        sep *= 1.1 // PREF
+        ali *= 1.0 // PREF
+        coh *= 1.0 // PREF
+        applyForce(force: sep)
+        applyForce(force: ali)
+        applyForce(force: coh)
+    }
+    
+    func separate(_ peas: [Pea]) -> Vector {
+        let spacing = 25.0 // PREF
+        var steer = Vector()
+        var count = 0
+        for pea in peas {
+            let distance = loc.distanceTo(pea.loc)
+            if distance < spacing && distance > 0 {
+                // Point away
+            }
+        }
+        // Continue this function...
+    }
+    
+    func align(_ peas: [Pea]) -> Vector {
+        <#function body#>
+    }
+    
+    func cohesion(_ peas: [Pea]) -> Vector {
+        <#function body#>
+    }
+    
+    // MARK: - Display
     
     func draw(to context: CGContext) {
         context.setStrokeColor(color)

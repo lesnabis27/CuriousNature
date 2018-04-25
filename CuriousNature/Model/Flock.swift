@@ -18,7 +18,6 @@ class Flock {
     init(with n: Int) {
         peas = [Pea]()
         populate(with: n)
-        print("Flock initialized")
     }
     
     func populate(with n: Int) {

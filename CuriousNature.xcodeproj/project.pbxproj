@@ -19,6 +19,7 @@
 		221244F820792CF4006DDFB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221244F620792CF4006DDFB1 /* Main.storyboard */; };
 		2212450420792CF4006DDFB1 /* CuriousNatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450320792CF4006DDFB1 /* CuriousNatureTests.swift */; };
 		2212450F20792DAE006DDFB1 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450E20792DAE006DDFB1 /* Vector.swift */; };
+		22D2E23C209011BD00AFB916 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2E23B209011BD00AFB916 /* Process.swift */; };
 		22F14063208EC075006FBD4E /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F14062208EC075006FBD4E /* PrefsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		2212450320792CF4006DDFB1 /* CuriousNatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriousNatureTests.swift; sourceTree = "<group>"; };
 		2212450520792CF4006DDFB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2212450E20792DAE006DDFB1 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		22D2E23B209011BD00AFB916 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Process.swift; sourceTree = "<group>"; };
 		22F14062208EC075006FBD4E /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,14 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				221244F020792CF3006DDFB1 /* AppDelegate.swift */,
-				22F14062208EC075006FBD4E /* PrefsViewController.swift */,
-				221244F220792CF3006DDFB1 /* ViewController.swift */,
-				220C770620793794005E2242 /* Canvas.swift */,
-				220C770A20793EDA005E2242 /* Flock.swift */,
-				220C770820793EC9005E2242 /* Pea.swift */,
-				2212450E20792DAE006DDFB1 /* Vector.swift */,
-				220C770F207FFC9A005E2242 /* ProcessKit.swift */,
 				220C77112082598B005E2242 /* Extensions.swift */,
+				22D2E23920900B5F00AFB916 /* View Controllers */,
+				22D2E23D2090127900AFB916 /* Views */,
+				22D2E23A20900B7E00AFB916 /* Model */,
 				221244F420792CF4006DDFB1 /* Assets.xcassets */,
 				221244F620792CF4006DDFB1 /* Main.storyboard */,
 				221244F920792CF4006DDFB1 /* Info.plist */,
@@ -126,6 +124,35 @@
 				2212450520792CF4006DDFB1 /* Info.plist */,
 			);
 			path = CuriousNatureTests;
+			sourceTree = "<group>";
+		};
+		22D2E23920900B5F00AFB916 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				221244F220792CF3006DDFB1 /* ViewController.swift */,
+				22F14062208EC075006FBD4E /* PrefsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		22D2E23A20900B7E00AFB916 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22D2E23B209011BD00AFB916 /* Process.swift */,
+				220C770A20793EDA005E2242 /* Flock.swift */,
+				220C770820793EC9005E2242 /* Pea.swift */,
+				2212450E20792DAE006DDFB1 /* Vector.swift */,
+				220C770F207FFC9A005E2242 /* ProcessKit.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		22D2E23D2090127900AFB916 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				220C770620793794005E2242 /* Canvas.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				220C770920793EC9005E2242 /* Pea.swift in Sources */,
+				22D2E23C209011BD00AFB916 /* Process.swift in Sources */,
 				22F14063208EC075006FBD4E /* PrefsViewController.swift in Sources */,
 				220C7710207FFC9A005E2242 /* ProcessKit.swift in Sources */,
 				221244F320792CF3006DDFB1 /* ViewController.swift in Sources */,
