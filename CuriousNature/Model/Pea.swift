@@ -17,8 +17,13 @@ class Pea {
     // MARK: - Properties
     
     var loc, ploc, vel, acc: Vector
-    let mass: Double
-    let color: CGColor
+    let mass: Double // PREF
+    let color: CGColor // PREF
+    
+    // MARK: - Static Properties
+    
+    static let maximumSpeed = 10.0 // PREF
+    static let maximumForce = 0.1 // PREF
     
     // MARK: - Initializers
     
@@ -42,18 +47,48 @@ class Pea {
     
     // MARK: - Motion
     
-    func randomMotion() {
-        acc = acc.random2D()
+    func update(seeking peas: [Pea]) {
+        flock(peas)
+        move()
+        wrap()
+        //bounce()
+    }
+    
+    func move() {
         vel += acc
-        vel = vel.limit(10.0)
+        vel = vel.limit(Pea.maximumSpeed)
         ploc = loc
         loc += vel
+    }
+    
+    func randomMotion() {
+        acc = acc.random2D()
+        move()
         bounce()
     }
     
     func bounce() {
         if loc.x > PK.width2x || loc.x < 0 {vel.x *= -1}
         if loc.y > PK.height2x || loc.y < 0 {vel.y *= -1}
+    }
+    
+    func wrap() {
+        if (loc.x > PK.width2x && ploc.x > PK.width2x) {
+            loc.x = 0
+            ploc.x = loc.x
+        }
+        else if (loc.x < 0 && ploc.x < 0) {
+            loc.x = PK.width2x
+            ploc.x = loc.x
+        }
+        if (loc.y > PK.height2x && ploc.y > PK.height2x) {
+            loc.y = 0
+            ploc.y = loc.y
+        }
+        else if (loc.y < 0 && ploc.y < 0) {
+            loc.y = PK.height2x
+            ploc.y = loc.y
+        }
     }
     
     // MARK: - Interaction
@@ -74,6 +109,7 @@ class Pea {
         applyForce(force: coh)
     }
     
+    // Steer away from nearby peas
     func separate(_ peas: [Pea]) -> Vector {
         let spacing = 25.0 // PREF
         var steer = Vector()
@@ -82,17 +118,77 @@ class Pea {
             let distance = loc.distanceTo(pea.loc)
             if distance < spacing && distance > 0 {
                 // Point away
+                var difference = loc - pea.loc
+                difference = difference.normalize()
+                difference /= distance // Closer peas weight higher
+                steer += difference
+                count += 1
             }
         }
-        // Continue this function...
+        // Average the steer vector
+        if count > 0 {
+            steer /= Double(count)
+        }
+        if steer.magnitude > 0 {
+            steer.magnitude = Pea.maximumSpeed
+            steer -= vel
+            steer = steer.limit(Pea.maximumForce)
+        }
+        return steer
     }
     
+    // Calculate average velocity of nearby peas
     func align(_ peas: [Pea]) -> Vector {
-        <#function body#>
+        let spacing = 50.0 // PREF
+        var sum = Vector()
+        var count = 0
+        for pea in peas {
+            let distance = loc.distanceTo(pea.loc)
+            if distance < spacing && distance > 0 {
+                // Move with
+                sum += pea.vel
+                count += 1
+            }
+        }
+        // Average the sum vector
+        if count > 0 {
+            sum /= Double(count)
+            sum.magnitude = Pea.maximumSpeed
+            var steer = sum - vel
+            steer = steer.limit(Pea.maximumForce)
+            return steer
+        }
+        return Vector()
     }
     
+    // Steer toward nearby peas
     func cohesion(_ peas: [Pea]) -> Vector {
-        <#function body#>
+        let spacing = 50.0 // PREF
+        var sum = Vector()
+        var count = 0
+        for pea in peas {
+            let distance = loc.distanceTo(pea.loc)
+            if distance < spacing && distance > 0 {
+                // Point toward
+                sum += pea.loc
+                count += 1
+            }
+        }
+        // Average the sum vector
+        if count > 0 {
+            sum /= Double(count)
+            return seek(sum)
+        }
+        return Vector()
+    }
+    
+    // Calculate a steering vector toward a target vector
+    func seek(_ target: Vector) -> Vector {
+        var heading = target - loc // Vector pointing toward target
+        heading.magnitude = Pea.maximumSpeed
+        var steer = heading - vel // Steering force
+        steer = steer.limit(Pea.maximumForce)
+        return steer
     }
     
     // MARK: - Display

@@ -22,14 +22,21 @@ class Flock {
     
     func populate(with n: Int) {
         for _ in 0..<n {
-            peas.append(Pea())
+            peas.append(Pea(atX: drand48() * PK.width2x, andY: drand48() * PK.height2x))
         }
     }
     
-    func update(to context: CGContext) {
-        for i in 0..<peas.count {
-            peas[i].randomMotion()
-            peas[i].draw(to: context)
+    func updateRandom(to context: CGContext) {
+        for pea in peas {
+            pea.randomMotion()
+            pea.draw(to: context)
+        }
+    }
+    
+    func updateFlock(to context: CGContext) {
+        for pea in peas {
+            pea.update(seeking: peas)
+            pea.draw(to: context)
         }
     }
     

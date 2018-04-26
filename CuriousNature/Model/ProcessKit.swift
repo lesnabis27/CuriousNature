@@ -53,4 +53,20 @@ struct PK {
         context.setLineWidth(weight)
     }
     
+    public static func randomDouble() -> Double {
+        // Start a new random number seed
+        let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
+        srand48(Int(time))
+        // Generate random number
+        return drand48()
+    }
+    
+    public static func randomDoubleFrom(_ start: Double, to end: Double) -> Double {
+        // Start a new random number seed
+        let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
+        srand48(Int(time))
+        // Generate random number
+        return drand48() * (end - start) + start
+    }
+    
 }
