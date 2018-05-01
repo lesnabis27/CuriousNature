@@ -17,7 +17,7 @@ class Pea {
     // MARK: - Properties
     
     var loc, ploc, vel, acc: Vector
-    let mass: Double // PREF
+    let depth: CGFloat // PREF
     let color: CGColor // PREF
     
     // MARK: - Static Properties
@@ -32,7 +32,7 @@ class Pea {
         ploc = [0, 0]
         vel = [0, 0]
         acc = [0, 0]
-        mass = 1.0
+        depth = CGFloat(drand48())
         color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.2)
     }
     
@@ -41,7 +41,7 @@ class Pea {
         ploc = [x, y]
         vel = [0, 0]
         acc = [0, 0]
-        mass = 1.0
+        depth = CGFloat(drand48())
         color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.2)
     }
     
@@ -101,7 +101,7 @@ class Pea {
         var sep = separate(peas)
         var ali = align(peas)
         var coh = cohesion(peas)
-        sep *= 1.1 // PREF
+        sep *= 1.0 // PREF
         ali *= 1.0 // PREF
         coh *= 1.0 // PREF
         applyForce(force: sep)
@@ -116,11 +116,13 @@ class Pea {
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
+            let depthDifference = 1 - abs(depth - pea.depth)
             if distance < spacing && distance > 0 {
                 // Point away
                 var difference = loc - pea.loc
                 difference = difference.normalize()
                 difference /= distance // Closer peas weight higher
+                difference *= Double(depthDifference)
                 steer += difference
                 count += 1
             }
@@ -144,9 +146,10 @@ class Pea {
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
+            let depthDifference = 1 - abs(depth - pea.depth)
             if distance < spacing && distance > 0 {
                 // Move with
-                sum += pea.vel
+                sum += (pea.vel * Double(depthDifference))
                 count += 1
             }
         }
@@ -194,8 +197,9 @@ class Pea {
     // MARK: - Display
     
     func draw(to context: CGContext) {
+        context.setBlendMode(.difference)
         context.setStrokeColor(color)
-        context.setLineWidth(2.0)
+        context.setLineWidth(depth * 10)
         PK.line(from: ploc.toCGPoint(), to: loc.toCGPoint(), in: context)
     }
     
