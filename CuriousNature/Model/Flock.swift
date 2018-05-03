@@ -36,7 +36,9 @@ class Flock {
     func updateFlock(to context: CGContext) {
         for pea in peas {
             pea.update(seeking: peas)
-            pea.draw(to: context)
+            //pea.drawInteractionsWithLines(to: context, peas: peas)
+            pea.drawInteractionsWithPolygons(to: context, peas: peas)
+            //pea.draw(to: context)
         }
     }
     

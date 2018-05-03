@@ -31,7 +31,7 @@ class ViewController: NSViewController {
     // MARK: - Properties
     var context: CGContext?
     var timer = Timer()
-    var flock = Flock(with: 100)
+    var flock = Flock(with: 50)
 
     // MARK: - View stuff
     override func viewWillAppear() {
@@ -62,7 +62,7 @@ class ViewController: NSViewController {
     // Code to be executed on startup
     func setup() {
         createContext()
-        PK.background(in: context!, gray: 0.05)
+        PK.background(in: context!, gray: 0.0)
         canvas.update(from: context)
     }
     
@@ -115,7 +115,7 @@ class ViewController: NSViewController {
     
     // MARK: - Timer
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true, block: self.update)
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.update)
         //NotificationCenter.default.post(name: .timerStart, object: nil)
         //if startMenuItem != nil {startMenuItem.title = "Stop"}
     }

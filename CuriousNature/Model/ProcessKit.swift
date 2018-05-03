@@ -45,6 +45,19 @@ struct PK {
         context.strokePath()
     }
     
+    public static func polygon(from points: [CGPoint], in context: CGContext) {
+        if points.count > 2 {
+            let path = CGMutablePath()
+            path.move(to: points.first!)
+            for i in 1..<points.count {
+                path.addLine(to: points[i])
+            }
+            path.closeSubpath()
+            context.addPath(path)
+            context.drawPath(using: .fill)
+        }
+    }
+    
     public static func stroke(in context: CGContext, color: CGColor) {
         context.setStrokeColor(color)
     }

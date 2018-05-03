@@ -102,8 +102,8 @@ class Pea {
         var ali = align(peas)
         var coh = cohesion(peas)
         sep *= 1.0 // PREF
-        ali *= 1.0 // PREF
-        coh *= 1.0 // PREF
+        ali *= 1.7 // PREF
+        coh *= 1.5 // PREF
         applyForce(force: sep)
         applyForce(force: ali)
         applyForce(force: coh)
@@ -122,7 +122,7 @@ class Pea {
                 var difference = loc - pea.loc
                 difference = difference.normalize()
                 difference /= distance // Closer peas weight higher
-                difference *= Double(depthDifference)
+                //difference *= Double(depthDifference)
                 steer += difference
                 count += 1
             }
@@ -149,7 +149,8 @@ class Pea {
             let depthDifference = 1 - abs(depth - pea.depth)
             if distance < spacing && distance > 0 {
                 // Move with
-                sum += (pea.vel * Double(depthDifference))
+                //sum += (pea.vel * Double(depthDifference))
+                sum += pea.vel
                 count += 1
             }
         }
@@ -197,10 +198,33 @@ class Pea {
     // MARK: - Display
     
     func draw(to context: CGContext) {
-        context.setBlendMode(.difference)
         context.setStrokeColor(color)
         context.setLineWidth(depth * 10)
         PK.line(from: ploc.toCGPoint(), to: loc.toCGPoint(), in: context)
+    }
+    
+    func drawInteractionsWithLines(to context: CGContext, peas: [Pea]) {
+        for pea in peas {
+            let distance = loc.distanceTo(pea.loc)
+            context.setLineCap(.round)
+            if distance < 50 && distance > 0 {
+                context.setStrokeColor(color)
+                context.setLineWidth(depth * 10)
+                PK.line(from: loc.toCGPoint(), to: pea.loc.toCGPoint(), in: context)
+            }
+        }
+    }
+    
+    func drawInteractionsWithPolygons(to context: CGContext, peas: [Pea]) {
+        for pea in peas {
+            let distance = loc.distanceTo(pea.loc)
+            if distance < 100 && distance > 0 {
+                //let alpha: CGFloat = 1.0 - 0.02 * CGFloat(distance)
+                context.setFillColor(color)
+                //context.setAlpha(alpha)
+                PK.polygon(from: [loc.toCGPoint(), pea.loc.toCGPoint(), pea.ploc.toCGPoint(), ploc.toCGPoint()], in: context)
+            }
+        }
     }
     
 }
