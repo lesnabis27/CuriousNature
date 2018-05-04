@@ -31,7 +31,7 @@ class ViewController: NSViewController {
     // MARK: - Properties
     var context: CGContext?
     var timer = Timer()
-    var flock = Flock(with: 50)
+    var flock = Flock(with: 100)
 
     // MARK: - View stuff
     override func viewWillAppear() {

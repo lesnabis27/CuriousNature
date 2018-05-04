@@ -116,13 +116,11 @@ class Pea {
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            let depthDifference = 1 - abs(depth - pea.depth)
             if distance < spacing && distance > 0 {
                 // Point away
                 var difference = loc - pea.loc
                 difference = difference.normalize()
                 difference /= distance // Closer peas weight higher
-                //difference *= Double(depthDifference)
                 steer += difference
                 count += 1
             }
@@ -146,7 +144,6 @@ class Pea {
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            let depthDifference = 1 - abs(depth - pea.depth)
             if distance < spacing && distance > 0 {
                 // Move with
                 //sum += (pea.vel * Double(depthDifference))
@@ -209,7 +206,7 @@ class Pea {
             context.setLineCap(.round)
             if distance < 50 && distance > 0 {
                 context.setStrokeColor(color)
-                context.setLineWidth(depth * 10)
+                context.setLineWidth(depth * 5)
                 PK.line(from: loc.toCGPoint(), to: pea.loc.toCGPoint(), in: context)
             }
         }
@@ -218,7 +215,7 @@ class Pea {
     func drawInteractionsWithPolygons(to context: CGContext, peas: [Pea]) {
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            if distance < 100 && distance > 0 {
+            if distance < 50 && distance > 0 {
                 //let alpha: CGFloat = 1.0 - 0.02 * CGFloat(distance)
                 context.setFillColor(color)
                 //context.setAlpha(alpha)

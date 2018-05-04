@@ -38,7 +38,7 @@ class Flock {
             pea.update(seeking: peas)
             //pea.drawInteractionsWithLines(to: context, peas: peas)
             pea.drawInteractionsWithPolygons(to: context, peas: peas)
-            //pea.draw(to: context)
+            pea.draw(to: context)
         }
     }
     
