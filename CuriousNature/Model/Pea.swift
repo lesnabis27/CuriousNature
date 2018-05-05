@@ -18,7 +18,7 @@ class Pea {
     
     var loc, ploc, vel, acc: Vector
     let depth: CGFloat // PREF
-    let color: CGColor // PREF
+    var color: CGColor // PREF
     
     // MARK: - Static Properties
     
@@ -32,8 +32,8 @@ class Pea {
         ploc = [0, 0]
         vel = [0, 0]
         acc = [0, 0]
-        depth = CGFloat(drand48())
-        color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.2)
+        depth = CGFloat.random()
+        color = CGColor.random()
     }
     
     init(atX x: Double, andY y: Double) {
@@ -41,8 +41,8 @@ class Pea {
         ploc = [x, y]
         vel = [0, 0]
         acc = [0, 0]
-        depth = CGFloat(drand48())
-        color = CGColor.init(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 0.2)
+        depth = CGFloat.random()
+        color = CGColor.random()
     }
     
     // MARK: - Motion
@@ -205,7 +205,9 @@ class Pea {
             let distance = loc.distanceTo(pea.loc)
             context.setLineCap(.round)
             if distance < 50 && distance > 0 {
+                //let alpha: CGFloat = 0.2
                 context.setStrokeColor(color)
+                //context.setAlpha(alpha)
                 context.setLineWidth(depth * 5)
                 PK.line(from: loc.toCGPoint(), to: pea.loc.toCGPoint(), in: context)
             }
@@ -217,6 +219,7 @@ class Pea {
             let distance = loc.distanceTo(pea.loc)
             if distance < 50 && distance > 0 {
                 //let alpha: CGFloat = 1.0 - 0.02 * CGFloat(distance)
+                //let alpha: CGFloat = 0.2
                 context.setFillColor(color)
                 //context.setAlpha(alpha)
                 PK.polygon(from: [loc.toCGPoint(), pea.loc.toCGPoint(), pea.ploc.toCGPoint(), ploc.toCGPoint()], in: context)

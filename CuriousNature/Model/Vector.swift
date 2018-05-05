@@ -189,8 +189,8 @@ public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equata
     }
     
     public func random2D() -> Vector {
-        let tau = Double.pi * 2
-        return Vector(fromAngle: drand48() * tau, magnitude: drand48())
+        let tau = UInt32(Double.pi * 2)
+        return Vector(fromAngle: Double(arc4random_uniform(tau)), magnitude: Double(arc4random_uniform(tau)))
     }
     
     public func toCGPoint() -> CGPoint {

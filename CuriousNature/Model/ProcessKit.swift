@@ -67,19 +67,13 @@ struct PK {
     }
     
     public static func randomDouble() -> Double {
-        // Start a new random number seed
-        let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
-        srand48(Int(time))
         // Generate random number
-        return drand48()
+        return Double(arc4random_uniform(UInt32(1.0)))
     }
     
     public static func randomDoubleFrom(_ start: Double, to end: Double) -> Double {
-        // Start a new random number seed
-        let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
-        srand48(Int(time))
         // Generate random number
-        return drand48() * (end - start) + start
+        return Double(arc4random_uniform(UInt32(end-start))) + start
     }
     
 }

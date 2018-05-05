@@ -20,12 +20,23 @@ class Flock {
         populate(with: n)
     }
     
+    
     func populate(with n: Int) {
         for _ in 0..<n {
-            peas.append(Pea(atX: drand48() * PK.width2x, andY: drand48() * PK.height2x))
+            peas.append(Pea(atX: Double(arc4random_uniform(UInt32(PK.width2x))), andY: Double(arc4random_uniform(UInt32(PK.height2x)))))
         }
     }
     
+    // Give peas a random color from an array
+    func color(_ colors: [CGColor]) {
+        if !colors.isEmpty {
+            for pea in peas {
+                pea.color = colors.randomItem()!
+            }
+        }
+    }
+    
+    // Update peas based on random motion
     func updateRandom(to context: CGContext) {
         for pea in peas {
             pea.randomMotion()
@@ -33,10 +44,10 @@ class Flock {
         }
     }
     
+    // Update peas based on interactions
     func updateFlock(to context: CGContext) {
         for pea in peas {
             pea.update(seeking: peas)
-            //pea.drawInteractionsWithLines(to: context, peas: peas)
             pea.drawInteractionsWithPolygons(to: context, peas: peas)
             pea.draw(to: context)
         }

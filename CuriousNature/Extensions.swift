@@ -28,3 +28,35 @@ extension Notification.Name {
     static let timerStart = Notification.Name("timerStart")
     static let timerStop = Notification.Name("timerStop")
 }
+
+extension Array {
+    init(count: Int, closure: () -> Element) {
+        self = [Element]()
+        for _ in 0..<count {
+            self.append(closure())
+        }
+    }
+    
+    func randomItem() -> Element? {
+        if isEmpty {
+            return nil
+        }
+        let index = Int(arc4random_uniform(UInt32(self.count)))
+        return self[index]
+    }
+}
+
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension CGColor {
+    static func random() -> CGColor {
+        let red = CGFloat.random()
+        let green = CGFloat.random()
+        let blue = CGFloat.random()
+        return CGColor(red: red, green: green, blue: blue, alpha: 1.0)
+    }
+}

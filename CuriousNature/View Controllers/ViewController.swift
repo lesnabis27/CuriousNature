@@ -61,6 +61,7 @@ class ViewController: NSViewController {
     // Analogous to Processing's setup
     // Code to be executed on startup
     func setup() {
+        flock.color(Array(count: 12){CGColor.random()})
         createContext()
         PK.background(in: context!, gray: 0.0)
         canvas.update(from: context)
