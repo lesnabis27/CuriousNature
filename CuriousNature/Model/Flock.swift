@@ -49,7 +49,7 @@ class Flock {
     }
     
     // Set flocking properties
-    func setFlockingParameters(separate: Double?, align: Double?, cohesion: Double?, range: Double?) {
+    func setFlockingParameters(separate: CGFloat?, align: CGFloat?, cohesion: CGFloat?, range: CGFloat?) {
         for pea in peas {
             if let sep = separate {
                 pea.sepWeight = sep

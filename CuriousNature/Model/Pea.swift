@@ -21,19 +21,19 @@ class Pea {
     var color: CGColor // PREF
     
     // Flocking properties
-    var sepWeight, aliWeight, cohWeight, activeRange: Double // 1.0, 1.7, 1.5, 50
+    var sepWeight, aliWeight, cohWeight, activeRange: CGFloat // 1.0, 1.7, 1.5, 50
     
     // MARK: - Static Properties
     
-    static let maximumSpeed = 10.0 // PREF
-    static let maximumForce = 0.1 // PREF
+    static let maximumSpeed: CGFloat = 10.0 // PREF
+    static let maximumForce: CGFloat = 0.1 // PREF
     
     // MARK: - Initializers
     
-    init(atX x: Double, andY y: Double) {
+    init(atX x: CGFloat, andY y: CGFloat) {
         loc = [x, y]
         ploc = [x, y]
-        vel = [PK.randomDouble(), PK.randomDouble()]
+        vel = Vector.random2D()
         acc = [0, 0]
         depth = CGFloat.random()
         color = CGColor.random()
@@ -44,7 +44,7 @@ class Pea {
     }
     
     convenience init() {
-        self.init(atX: PK.randomDouble(upTo: PK.width), andY: PK.randomDouble(upTo: PK.height))
+        self.init(atX: PK.randomCGFloat(upTo: PK.width), andY: PK.randomCGFloat(upTo: PK.height))
     }
     
     // MARK: - Motion
@@ -64,7 +64,7 @@ class Pea {
     }
     
     func randomMotion() {
-        acc = acc.random2D()
+        acc = Vector.random2D()
         move()
         bounce()
     }
@@ -128,7 +128,7 @@ class Pea {
         }
         // Average the steer vector
         if count > 0 {
-            steer /= Double(count)
+            steer /= CGFloat(count)
         }
         if steer.magnitude > 0 {
             steer.magnitude = Pea.maximumSpeed
@@ -152,7 +152,7 @@ class Pea {
         }
         // Average the sum vector
         if count > 0 {
-            sum /= Double(count)
+            sum /= CGFloat(count)
             sum.magnitude = Pea.maximumSpeed
             var steer = sum - vel
             steer = steer.limit(Pea.maximumForce)
@@ -175,7 +175,7 @@ class Pea {
         }
         // Average the sum vector
         if count > 0 {
-            sum /= Double(count)
+            sum /= CGFloat(count)
             return seek(sum)
         }
         return Vector()

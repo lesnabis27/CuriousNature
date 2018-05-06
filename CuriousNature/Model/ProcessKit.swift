@@ -12,19 +12,19 @@ import Cocoa
 
 struct PK {
     
-    public static var width: Double {
-        return Double(NSScreen.main!.frame.width)
+    public static var width: CGFloat {
+        return NSScreen.main!.frame.width
     }
     
-    public static var width2x: Double {
+    public static var width2x: CGFloat {
         return width * 2
     }
     
-    public static var height: Double {
-        return Double(NSScreen.main!.frame.height)
+    public static var height: CGFloat {
+        return NSScreen.main!.frame.height
     }
     
-    public static var height2x: Double {
+    public static var height2x: CGFloat {
         return height * 2
     }
     
@@ -72,18 +72,18 @@ struct PK {
     }
     
     // Generate random number from 0.0 to 1.0
-    public static func randomDouble() -> Double {
-        return Double(arc4random_uniform(UInt32(1.0)))
+    public static func randomCGFloat() -> CGFloat {
+        return CGFloat(arc4random_uniform(UInt32(1.0)))
     }
     
     // Generate random number up to a specified number
-    public static func randomDouble(upTo range: Double) -> Double {
-        return Double(arc4random_uniform(UInt32(range)))
+    public static func randomCGFloat(upTo range: CGFloat) -> CGFloat {
+        return CGFloat(arc4random_uniform(UInt32(range)))
     }
     
     // Generate random number between two numbers
-    public static func randomDouble(from start: Double, to end: Double) -> Double {
-        return Double(arc4random_uniform(UInt32(end-start))) + start
+    public static func randomCGFloat(from start: CGFloat, to end: CGFloat) -> CGFloat {
+        return CGFloat(arc4random_uniform(UInt32(end-start))) + start
     }
     
 }

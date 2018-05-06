@@ -20,46 +20,36 @@ extension FloatingPoint {
 }
 
 public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equatable {
-    public var x: Double, y: Double, z: Double
+    public var x: CGFloat, y: CGFloat
     
     public var description: String {
-        return "(\(x), \(y), \(z))"
+        return "(\(x), \(y))"
     }
     
     public init() {
         x = 0.0
         y = 0.0
-        z = 0.0
     }
     
-    public init(_ x: Double, _ y: Double) {
+    public init(_ x: CGFloat, _ y: CGFloat) {
         self.x = x
         self.y = y
-        self.z = -0.0
     }
     
-    public init(_ x: Double, _ y: Double, _ z: Double) {
-        self.x = x
-        self.y = y
-        self.z = z
-    }
-    
-    public init(arrayLiteral: Double...) {
+    public init(arrayLiteral: CGFloat...) {
         let count = arrayLiteral.count
-        assert(count == 2 || count == 3, "Must initialize vector with two or three values")
+        assert(count == 2, "Must initialize vector with two values")
         x = arrayLiteral[0]
         y = arrayLiteral[1]
-        z = count == 3 ? arrayLiteral[2] : 0.0
     }
     
-    public init(fromAngle theta: Double, magnitude: Double) {
+    public init(fromAngle theta: CGFloat, magnitude: CGFloat) {
         x = magnitude * cos(theta)
         y = magnitude * sin(theta)
-        z = 0.0;
     }
     
     public static func +(left: Vector, right: Vector) -> Vector {
-        return [left.x + right.x, left.y + right.y, left.z + right.z]
+        return [left.x + right.x, left.y + right.y]
     }
     
     public static func +=(left: inout Vector, right: Vector) {
@@ -71,7 +61,7 @@ public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equata
     }
     
     public static prefix func -(vector: Vector) -> Vector {
-        return [-vector.x, -vector.y, -vector.z]
+        return [-vector.x, -vector.y]
     }
     
     public static func -(left: Vector, right: Vector) -> Vector {
@@ -82,60 +72,56 @@ public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equata
         left = left - right
     }
     
-    public static func *(left: Vector, right: Double) -> Vector {
-        return [left.x * right, left.y * right, left.z * right]
+    public static func *(left: Vector, right: CGFloat) -> Vector {
+        return [left.x * right, left.y * right]
     }
     
-    public static func *(left: Double, right: Vector) -> Vector {
+    public static func *(left: CGFloat, right: Vector) -> Vector {
         return right * left
     }
     
-    public static func *=(left: inout Vector, right: Double) {
+    public static func *=(left: inout Vector, right: CGFloat) {
         left = left * right
     }
     
-    public static func *(left: Vector, right: Vector) -> Vector {
-        return [left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x]
+    public static func *(left: Vector, right: Vector) -> CGFloat {
+        return left.x * right.y - left.y * right.x
     }
     
-    public static func *=(left: inout Vector, right: Vector) {
-        left = left * right
+    public static func •(left: Vector, right: Vector) -> CGFloat {
+        return left.x * right.x + left.y * right.y
     }
     
-    public static func •(left: Vector, right: Vector) -> Double {
-        return left.x * right.x + left.y * right.y + left.z * right.z
+    public static func /(left: Vector, right: CGFloat) -> Vector {
+        return [left.x/right, left.y/right]
     }
     
-    public static func /(left: Vector, right: Double) -> Vector {
-        return [left.x/right, left.y/right, left.z/right]
-    }
-    
-    public static func /=(left: inout Vector, right: Double) {
+    public static func /=(left: inout Vector, right: CGFloat) {
         left = left/right
     }
     
     public static func ==(left: Vector, right: Vector) -> Bool {
-        return left.x == right.x && left.y == right.y && left.z == right.z
+        return left.x == right.x && left.y == right.y
     }
     
     public var isZero: Bool {
-        return x == 0.0 && y == 0.0 && z == 0.0
+        return x == 0.0 && y == 0.0
     }
     
-    public var magnitude: Double {
+    public var magnitude: CGFloat {
         get {
-            return sqrt(x * x + y * y + z * z)
+            return sqrt(x * x + y * y)
         }
         set(newMagnitude) {
             self = normalize() * newMagnitude
         }
     }
     
-    public var magnitudeSquared: Double {
-        return x * x + y * y + z * z
+    public var magnitudeSquared: CGFloat {
+        return x * x + y * y
     }
     
-    public var heading: Double {
+    public var heading: CGFloat {
         get {
             if isZero {
                 return 0.0
@@ -150,47 +136,51 @@ public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equata
     
     public func normalize() -> Vector {
         if !isZero {
-            return [x/magnitude, y/magnitude, z/magnitude]
+            return [x/magnitude, y/magnitude]
         }
-        return [x, y, z]
+        return [x, y]
     }
     
-    public func limit(_ max: Double) -> Vector {
+    public func limit(_ max: CGFloat) -> Vector {
         if magnitude > max {
             return normalize() * max
         }
         return self
     }
     
-    public func rotate(_ theta: Double) -> Vector {
-        var result: Vector = [x, y, z]
+    public func rotate(_ theta: CGFloat) -> Vector {
+        var result: Vector = [x, y]
         result.x = x * cos(theta) - y * sin(theta)
         result.y = x * sin(theta) + y * cos(theta)
         return result
     }
     
-    public func angleBetween(_ other: Vector) -> Double {
+    public func angleBetween(_ other: Vector) -> CGFloat {
         if isZero || other.isZero {
             return 0.0
         }
         return other.heading - heading
     }
     
-    public func linearInterpolate(to other: Vector, amount: Double) -> Vector {
+    public func linearInterpolate(to other: Vector, amount: CGFloat) -> Vector {
         let x = self.x + (other.x - self.x) * amount
         let y = self.y + (other.y - self.y) * amount
-        let z = self.z + (other.z - self.z) * amount
-        return [x, y, z]
+        return [x, y]
     }
     
-    public func distanceTo(_ other: Vector) -> Double {
+    public func distanceTo(_ other: Vector) -> CGFloat {
         let temp: Vector = [x - other.x, y - other.y]
         return temp.magnitude
     }
     
-    public func random2D() -> Vector {
-        let tau = UInt32(Double.pi * 2)
-        return Vector(fromAngle: Double(arc4random_uniform(tau)), magnitude: Double(arc4random_uniform(tau)))
+    public static func random2D() -> Vector {
+        let tau = UInt32(CGFloat.pi * 2)
+        return Vector(fromAngle: CGFloat(arc4random_uniform(tau)), magnitude: CGFloat(arc4random_uniform(tau)))
+    }
+    
+    public mutating func zero() {
+        x = 0.0
+        y = 0.0
     }
     
     public func toCGPoint() -> CGPoint {
