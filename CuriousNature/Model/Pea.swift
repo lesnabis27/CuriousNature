@@ -40,11 +40,11 @@ class Pea {
         sepWeight = 1.0
         aliWeight = 1.7
         cohWeight = 1.5
-        activeRange = 50
+        activeRange = 25
     }
     
     convenience init() {
-        self.init(atX: PK.randomDouble(upTo: PK.width2x), andY: PK.randomDouble(upTo: PK.height2x))
+        self.init(atX: PK.randomDouble(upTo: PK.width), andY: PK.randomDouble(upTo: PK.height))
     }
     
     // MARK: - Motion
@@ -70,25 +70,25 @@ class Pea {
     }
     
     func bounce() {
-        if loc.x > PK.width2x || loc.x < 0 {vel.x *= -1}
-        if loc.y > PK.height2x || loc.y < 0 {vel.y *= -1}
+        if loc.x > PK.width || loc.x < 0 {vel.x *= -1}
+        if loc.y > PK.height || loc.y < 0 {vel.y *= -1}
     }
     
     func wrap() {
-        if (loc.x > PK.width2x && ploc.x > PK.width2x) {
+        if (loc.x > PK.width && ploc.x > PK.width) {
             loc.x = 0
             ploc.x = loc.x
         }
         else if (loc.x < 0 && ploc.x < 0) {
-            loc.x = PK.width2x
+            loc.x = PK.width
             ploc.x = loc.x
         }
-        if (loc.y > PK.height2x && ploc.y > PK.height2x) {
+        if (loc.y > PK.height && ploc.y > PK.height) {
             loc.y = 0
             ploc.y = loc.y
         }
         else if (loc.y < 0 && ploc.y < 0) {
-            loc.y = PK.height2x
+            loc.y = PK.height
             ploc.y = loc.y
         }
     }
@@ -194,7 +194,7 @@ class Pea {
     
     func draw(to context: CGContext) {
         context.setStrokeColor(color)
-        context.setLineWidth(depth * 10)
+        context.setLineWidth(depth * 5)
         PK.line(from: ploc.toCGPoint(), to: loc.toCGPoint(), in: context)
     }
     

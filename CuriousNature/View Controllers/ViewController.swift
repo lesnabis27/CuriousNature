@@ -31,7 +31,7 @@ class ViewController: NSViewController {
     // MARK: - Properties
     var context: CGContext?
     var timer = Timer()
-    var flock = Flock(with: 60)
+    var flock = Flock(with: 100)
 
     // MARK: - View stuff
     override func viewWillAppear() {
@@ -62,7 +62,7 @@ class ViewController: NSViewController {
     // Code to be executed on startup
     func setup() {
         flock.color(Array(count: 12){CGColor.random()})
-        flock.alpha = 0.2
+        flock.alpha = 0.3
         createContext()
         PK.background(in: context!, gray: 0.0)
         canvas.update(from: context)
@@ -72,7 +72,7 @@ class ViewController: NSViewController {
     // Analogous to Processing's draw
     // Loops for the duration of the program
     @objc func update(_: Timer) {
-        //PK.fadeBackground(in: context!, gray: 0.0, alpha: 0.01)
+        PK.fadeBackground(in: context!, gray: 0.0, alpha: 0.01)
         flock.updateFlock(to: context!)
         canvas.update(from: context)
     }
@@ -81,8 +81,8 @@ class ViewController: NSViewController {
     func createContext() {
         context = CGContext(
             data: nil,
-            width: Int(PK.width2x),
-            height: Int(PK.height2x),
+            width: Int(PK.width),
+            height: Int(PK.height),
             bitsPerComponent: 8,
             bytesPerRow: 0,
             space: CGColorSpaceCreateDeviceRGB(),
@@ -118,7 +118,7 @@ class ViewController: NSViewController {
     
     // MARK: - Timer
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.update)
+        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: self.update)
         //NotificationCenter.default.post(name: .timerStart, object: nil)
         //if startMenuItem != nil {startMenuItem.title = "Stop"}
     }

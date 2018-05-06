@@ -30,17 +30,17 @@ struct PK {
     
     public static func background(in context: CGContext, red: CGFloat, green: CGFloat, blue: CGFloat) {
         context.setFillColor(red: red, green: green, blue: blue, alpha: 1.0)
-        context.fill(CGRect.init(x: 0, y: 0, width: width2x, height: height2x))
+        context.fill(CGRect.init(x: 0, y: 0, width: width, height: height))
     }
     
     public static func background(in context: CGContext, gray: CGFloat) {
         context.setFillColor(gray: gray, alpha: 1.0)
-        context.fill(CGRect.init(x: 0, y: 0, width: width2x, height: height2x))
+        context.fill(CGRect.init(x: 0, y: 0, width: width, height: height))
     }
     
     public static func fadeBackground(in context: CGContext, gray: CGFloat, alpha: CGFloat) {
         context.setFillColor(gray: gray, alpha: alpha)
-        context.fill(CGRect.init(x: 0, y: 0, width: width2x, height: width2x))
+        context.fill(CGRect.init(x: 0, y: 0, width: width, height: width))
     }
     
     public static func line(from begin: CGPoint, to end: CGPoint, in context: CGContext) {
@@ -71,17 +71,18 @@ struct PK {
         context.setLineWidth(weight)
     }
     
+    // Generate random number from 0.0 to 1.0
     public static func randomDouble() -> Double {
-        // Generate random number
         return Double(arc4random_uniform(UInt32(1.0)))
     }
     
+    // Generate random number up to a specified number
     public static func randomDouble(upTo range: Double) -> Double {
         return Double(arc4random_uniform(UInt32(range)))
     }
     
+    // Generate random number between two numbers
     public static func randomDouble(from start: Double, to end: Double) -> Double {
-        // Generate random number
         return Double(arc4random_uniform(UInt32(end-start))) + start
     }
     
