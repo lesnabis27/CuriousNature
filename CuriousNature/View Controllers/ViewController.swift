@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - IBOutlets
     @IBOutlet weak var canvas: Canvas!
@@ -31,11 +31,15 @@ class ViewController: NSViewController {
     // MARK: - Properties
     var context: CGContext?
     var timer = Timer()
-    var flock = Flock(with: 100)
+    var subtimer = 0;
+    var flock = Flock(with: 30) //PREF
 
     // MARK: - View stuff
     override func viewWillAppear() {
         super.viewWillAppear()
+        
+        // Window delegate
+        self.view.window?.delegate = self
         
         // Invisible title bar
         self.view.window?.styleMask.insert(NSWindow.StyleMask.unifiedTitleAndToolbar)
@@ -51,10 +55,23 @@ class ViewController: NSViewController {
         setup()
         startTimer()
     }
+    
+    override func viewWillDisappear() {
+        stopTimer()
+    }
 
     override var representedObject: Any? {
         didSet {
         }
+    }
+    
+    // MARK: - NSWindowDelegate
+    func windowDidEnterFullScreen(_ notification: Notification) {
+        NSCursor.hide()
+    }
+    
+    func windowDidExitFullScreen(_ notification: Notification) {
+        NSCursor.unhide()
     }
     
     // MARK: - Setup
@@ -62,7 +79,8 @@ class ViewController: NSViewController {
     // Code to be executed on startup
     func setup() {
         flock.color(Array(count: 12){CGColor.random()})
-        flock.alpha = 0.3
+        flock.setFlockingParameters(separate: nil, align: nil, cohesion: nil, range: 50)
+        flock.alpha = 0.2
         createContext()
         PK.background(in: context!, gray: 0.0)
         canvas.update(from: context)
@@ -72,7 +90,11 @@ class ViewController: NSViewController {
     // Analogous to Processing's draw
     // Loops for the duration of the program
     @objc func update(_: Timer) {
-        PK.fadeBackground(in: context!, gray: 0.0, alpha: 0.01)
+        subtimer += 1
+        if subtimer % 5 == 0 {
+            PK.fadeBackground(in: context!, gray: 0.0, alpha: 0.01)
+            subtimer = 0
+        }
         flock.updateFlock(to: context!)
         canvas.update(from: context)
     }
