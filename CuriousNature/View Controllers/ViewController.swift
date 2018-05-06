@@ -50,6 +50,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        startTimer()
     }
     
     override func viewWillDisappear() {
