@@ -38,6 +38,11 @@ struct PK {
         context.fill(CGRect.init(x: 0, y: 0, width: width2x, height: height2x))
     }
     
+    public static func fadeBackground(in context: CGContext, gray: CGFloat, alpha: CGFloat) {
+        context.setFillColor(gray: gray, alpha: alpha)
+        context.fill(CGRect.init(x: 0, y: 0, width: width2x, height: width2x))
+    }
+    
     public static func line(from begin: CGPoint, to end: CGPoint, in context: CGContext) {
         context.beginPath()
         context.move(to: begin)
@@ -71,7 +76,11 @@ struct PK {
         return Double(arc4random_uniform(UInt32(1.0)))
     }
     
-    public static func randomDoubleFrom(_ start: Double, to end: Double) -> Double {
+    public static func randomDouble(upTo range: Double) -> Double {
+        return Double(arc4random_uniform(UInt32(range)))
+    }
+    
+    public static func randomDouble(from start: Double, to end: Double) -> Double {
         // Generate random number
         return Double(arc4random_uniform(UInt32(end-start))) + start
     }

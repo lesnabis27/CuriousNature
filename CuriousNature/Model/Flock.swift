@@ -13,17 +13,29 @@
 import Foundation
 
 class Flock {
-    var peas: [Pea]
     
+    // MARK: - Properties
+    var peas: [Pea]
+    var alpha: CGFloat
+    
+    // MARK: - Initializers
     init(with n: Int) {
         peas = [Pea]()
+        alpha = 1.0
         populate(with: n)
     }
     
-    
+    // MARK: - Methods
     func populate(with n: Int) {
         for _ in 0..<n {
-            peas.append(Pea(atX: Double(arc4random_uniform(UInt32(PK.width2x))), andY: Double(arc4random_uniform(UInt32(PK.height2x)))))
+            peas.append(Pea())
+        }
+    }
+    
+    // Give peas a singular color
+    func color(_ color: CGColor) {
+        for pea in peas {
+            pea.color = color
         }
     }
     
@@ -36,8 +48,29 @@ class Flock {
         }
     }
     
+    // Set flocking properties
+    func setFlockingParameters(separate: Double?, align: Double?, cohesion: Double?, range: Double?) {
+        for pea in peas {
+            if let sep = separate {
+                pea.sepWeight = sep
+            }
+            if let ali = align {
+                pea.aliWeight = ali
+            }
+            if let coh = cohesion {
+                pea.cohWeight = coh
+            }
+            if let rng = range {
+                pea.activeRange = rng
+            }
+        }
+    }
+    
+    // MARK: - Updaters
+    
     // Update peas based on random motion
     func updateRandom(to context: CGContext) {
+        context.setAlpha(alpha)
         for pea in peas {
             pea.randomMotion()
             pea.draw(to: context)
@@ -46,6 +79,7 @@ class Flock {
     
     // Update peas based on interactions
     func updateFlock(to context: CGContext) {
+        context.setAlpha(alpha)
         for pea in peas {
             pea.update(seeking: peas)
             pea.drawInteractionsWithPolygons(to: context, peas: peas)

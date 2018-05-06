@@ -31,7 +31,7 @@ class ViewController: NSViewController {
     // MARK: - Properties
     var context: CGContext?
     var timer = Timer()
-    var flock = Flock(with: 100)
+    var flock = Flock(with: 60)
 
     // MARK: - View stuff
     override func viewWillAppear() {
@@ -62,6 +62,7 @@ class ViewController: NSViewController {
     // Code to be executed on startup
     func setup() {
         flock.color(Array(count: 12){CGColor.random()})
+        flock.alpha = 0.2
         createContext()
         PK.background(in: context!, gray: 0.0)
         canvas.update(from: context)
@@ -71,6 +72,7 @@ class ViewController: NSViewController {
     // Analogous to Processing's draw
     // Loops for the duration of the program
     @objc func update(_: Timer) {
+        //PK.fadeBackground(in: context!, gray: 0.0, alpha: 0.01)
         flock.updateFlock(to: context!)
         canvas.update(from: context)
     }

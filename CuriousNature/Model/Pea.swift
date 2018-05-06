@@ -20,6 +20,9 @@ class Pea {
     let depth: CGFloat // PREF
     var color: CGColor // PREF
     
+    // Flocking properties
+    var sepWeight, aliWeight, cohWeight, activeRange: Double // 1.0, 1.7, 1.5, 50
+    
     // MARK: - Static Properties
     
     static let maximumSpeed = 10.0 // PREF
@@ -27,22 +30,21 @@ class Pea {
     
     // MARK: - Initializers
     
-    init() {
-        loc = [PK.width, PK.height]
-        ploc = [0, 0]
-        vel = [0, 0]
-        acc = [0, 0]
-        depth = CGFloat.random()
-        color = CGColor.random()
-    }
-    
     init(atX x: Double, andY y: Double) {
         loc = [x, y]
         ploc = [x, y]
-        vel = [0, 0]
+        vel = [PK.randomDouble(), PK.randomDouble()]
         acc = [0, 0]
         depth = CGFloat.random()
         color = CGColor.random()
+        sepWeight = 1.0
+        aliWeight = 1.7
+        cohWeight = 1.5
+        activeRange = 50
+    }
+    
+    convenience init() {
+        self.init(atX: PK.randomDouble(upTo: PK.width2x), andY: PK.randomDouble(upTo: PK.height2x))
     }
     
     // MARK: - Motion
@@ -101,9 +103,9 @@ class Pea {
         var sep = separate(peas)
         var ali = align(peas)
         var coh = cohesion(peas)
-        sep *= 1.0 // PREF
-        ali *= 1.7 // PREF
-        coh *= 1.5 // PREF
+        sep *= sepWeight // PREF
+        ali *= aliWeight // PREF
+        coh *= cohWeight // PREF
         applyForce(force: sep)
         applyForce(force: ali)
         applyForce(force: coh)
@@ -111,12 +113,11 @@ class Pea {
     
     // Steer away from nearby peas
     func separate(_ peas: [Pea]) -> Vector {
-        let spacing = 25.0 // PREF
         var steer = Vector()
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            if distance < spacing && distance > 0 {
+            if distance < activeRange && distance > 0 {
                 // Point away
                 var difference = loc - pea.loc
                 difference = difference.normalize()
@@ -139,14 +140,12 @@ class Pea {
     
     // Calculate average velocity of nearby peas
     func align(_ peas: [Pea]) -> Vector {
-        let spacing = 50.0 // PREF
         var sum = Vector()
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            if distance < spacing && distance > 0 {
+            if distance < activeRange && distance > 0 {
                 // Move with
-                //sum += (pea.vel * Double(depthDifference))
                 sum += pea.vel
                 count += 1
             }
@@ -164,12 +163,11 @@ class Pea {
     
     // Steer toward nearby peas
     func cohesion(_ peas: [Pea]) -> Vector {
-        let spacing = 50.0 // PREF
         var sum = Vector()
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            if distance < spacing && distance > 0 {
+            if distance < activeRange && distance > 0 {
                 // Point toward
                 sum += pea.loc
                 count += 1
@@ -204,10 +202,8 @@ class Pea {
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
             context.setLineCap(.round)
-            if distance < 50 && distance > 0 {
-                //let alpha: CGFloat = 0.2
+            if distance < activeRange && distance > 0 {
                 context.setStrokeColor(color)
-                //context.setAlpha(alpha)
                 context.setLineWidth(depth * 5)
                 PK.line(from: loc.toCGPoint(), to: pea.loc.toCGPoint(), in: context)
             }
@@ -217,11 +213,8 @@ class Pea {
     func drawInteractionsWithPolygons(to context: CGContext, peas: [Pea]) {
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            if distance < 50 && distance > 0 {
-                //let alpha: CGFloat = 1.0 - 0.02 * CGFloat(distance)
-                //let alpha: CGFloat = 0.2
+            if distance < activeRange && distance > 0 {
                 context.setFillColor(color)
-                //context.setAlpha(alpha)
                 PK.polygon(from: [loc.toCGPoint(), pea.loc.toCGPoint(), pea.ploc.toCGPoint(), ploc.toCGPoint()], in: context)
             }
         }

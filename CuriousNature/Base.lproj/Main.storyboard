@@ -268,13 +268,13 @@
                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pQL-Xl-PZR">
                                 <rect key="frame" x="20" y="20" width="560" height="360"/>
                                 <subviews>
-                                    <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7s-fE-QcH">
+                                    <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7s-fE-QcH">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="360"/>
                                         <clipView key="contentView" id="wKf-KM-pRh">
-                                            <rect key="frame" x="0.0" y="23" width="150" height="337"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="360"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="21" rowSizeStyle="automatic" headerView="Hus-1y-JZ7" viewBased="YES" id="iYh-1h-xrn">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Hus-1y-JZ7" viewBased="YES" id="iYh-1h-xrn">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="337"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
