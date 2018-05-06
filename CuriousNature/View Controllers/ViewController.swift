@@ -18,21 +18,19 @@ class ViewController: NSViewController, NSWindowDelegate {
         showExportPanel()
     }
     @IBAction func startMenuItemSelected(_ sender: Any) {
-        if timer.isValid {
+        if environment.timer.isValid {
             stopTimer()
         } else {
             startTimer()
         }
     }
     @IBAction func clearMenuItemSelected(_ sender: Any) {
-        clearCanvas()
+        environment.clearCanvas(view: canvas)
     }
     
     // MARK: - Properties
-    var context: CGContext?
+    var environment = Environment()
     var timer = Timer()
-    var subtimer = 0;
-    var flock = Flock(with: 30) //PREF
 
     // MARK: - View stuff
     override func viewWillAppear() {
@@ -52,8 +50,6 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        startTimer()
     }
     
     override func viewWillDisappear() {
@@ -74,54 +70,6 @@ class ViewController: NSViewController, NSWindowDelegate {
         NSCursor.unhide()
     }
     
-    // MARK: - Setup
-    // Analogous to Processing's setup
-    // Code to be executed on startup
-    func setup() {
-        flock.color(Array(count: 12){CGColor.random()})
-        flock.setFlockingParameters(separate: nil, align: nil, cohesion: nil, range: 50)
-        flock.alpha = 0.2
-        createContext()
-        PK.background(in: context!, gray: 0.0)
-        canvas.update(from: context)
-    }
-    
-    // MARK: - Update
-    // Analogous to Processing's draw
-    // Loops for the duration of the program
-    @objc func update(_: Timer) {
-        subtimer += 1
-        if subtimer % 5 == 0 {
-            PK.fadeBackground(in: context!, gray: 0.0, alpha: 0.01)
-            subtimer = 0
-        }
-        flock.updateFlock(to: context!)
-        canvas.update(from: context)
-    }
-    
-    // MARK: - Context
-    func createContext() {
-        context = CGContext(
-            data: nil,
-            width: Int(PK.width),
-            height: Int(PK.height),
-            bitsPerComponent: 8,
-            bytesPerRow: 0,
-            space: CGColorSpaceCreateDeviceRGB(),
-            bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
-    }
-    
-    func releaseContext() {
-        context = nil
-    }
-    
-    func clearCanvas() {
-        releaseContext()
-        createContext()
-        PK.background(in: context!, gray: 0.05)
-        canvas.update(from: context)
-    }
-    
     // MARK: - Saving and opening
     func showExportPanel() {
         guard let window = view.window else {return}
@@ -131,7 +79,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         panel.beginSheetModal(for: window) { (result) in
             if result == NSApplication.ModalResponse.OK,
                 let url = panel.url {
-                let cgimage = self.context!.makeImage()
+                let cgimage = self.environment.context!.makeImage()
                 let nsimage = NSImage(cgImage: cgimage!, size: NSZeroSize)
                 nsimage.pngWrite(to: url, options: .withoutOverwriting)
             }
@@ -140,16 +88,17 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - Timer
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: self.update)
-        //NotificationCenter.default.post(name: .timerStart, object: nil)
-        //if startMenuItem != nil {startMenuItem.title = "Stop"}
+        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: update)
     }
     
     func stopTimer() {
         timer.invalidate()
-        //NotificationCenter.default.post(name: .timerStop, object: nil)
-        //if startMenuItem != nil {startMenuItem.title = "Start"}
     }
-
+    
+    @objc func update(_: Timer) {
+        environment.update()
+        canvas.update(from: environment.context)
+    }
+    
 }
 
