@@ -169,8 +169,14 @@ public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equata
     }
     
     public func distanceTo(_ other: Vector) -> CGFloat {
-        let temp: Vector = [x - other.x, y - other.y]
+        let temp = self - other
         return temp.magnitude
+    }
+    
+    // Returns distance squared, useful for performance
+    public func simpleDistanceTo(_ other: Vector) -> CGFloat {
+        let temp = self - other
+        return temp.magnitudeSquared
     }
     
     public static func random2D() -> Vector {

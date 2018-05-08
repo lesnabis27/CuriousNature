@@ -18,7 +18,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         showExportPanel()
     }
     @IBAction func startMenuItemSelected(_ sender: Any) {
-        if environment.timer.isValid {
+        if timer.isValid {
             stopTimer()
         } else {
             startTimer()
@@ -31,6 +31,8 @@ class ViewController: NSViewController, NSWindowDelegate {
     // MARK: - Properties
     var environment = Environment()
     var timer = Timer()
+    var mouseTimer = 0
+    var mouseShouldBeHidden = false
 
     // MARK: - View stuff
     override func viewWillAppear() {
@@ -71,6 +73,10 @@ class ViewController: NSViewController, NSWindowDelegate {
         NSCursor.unhide()
     }
     
+    override func mouseMoved(with event: NSEvent) {
+        super.mouseMoved(with: event)
+    }
+    
     // MARK: - Saving and opening
     func showExportPanel() {
         guard let window = view.window else {return}
@@ -90,6 +96,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     // MARK: - Timer
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true, block: update)
+        timer.tolerance = 0.01
     }
     
     func stopTimer() {

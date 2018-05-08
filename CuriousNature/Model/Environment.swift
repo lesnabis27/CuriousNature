@@ -12,7 +12,6 @@ class Environment {
     
     // MARK: - Properties
     var context: CGContext?
-    var timer = Timer()
     var subtimer = 0 // PREF
     var flock: Flock // PREF
 

@@ -19,9 +19,16 @@ class Pea {
     var loc, ploc, vel, acc: Vector
     let depth: CGFloat // PREF
     var color: CGColor // PREF
+    var currentInteractions: Int
     
     // Flocking properties
-    var sepWeight, aliWeight, cohWeight, activeRange: CGFloat // 1.0, 1.7, 1.5, 50
+    var sepWeight, aliWeight, cohWeight: CGFloat
+    var activeRange: CGFloat {
+        didSet {
+            activeRangeSquared = activeRange * activeRange
+        }
+    }
+    var activeRangeSquared: CGFloat
     
     // MARK: - Static Properties
     
@@ -37,10 +44,12 @@ class Pea {
         acc = [0, 0]
         depth = CGFloat.random()
         color = CGColor.random()
+        currentInteractions = 0
         sepWeight = 1.0
         aliWeight = 1.7
         cohWeight = 1.5
-        activeRange = 25
+        activeRange = 50
+        activeRangeSquared = activeRange * activeRange
     }
     
     convenience init() {
@@ -135,6 +144,8 @@ class Pea {
             steer -= vel
             steer = steer.limit(Pea.maximumForce)
         }
+        // Tally interactions here to reduce cpu footprint
+        tallyInteractions(count)
         return steer
     }
     
@@ -143,8 +154,8 @@ class Pea {
         var sum = Vector()
         var count = 0
         for pea in peas {
-            let distance = loc.distanceTo(pea.loc)
-            if distance < activeRange && distance > 0 {
+            let distance = loc.simpleDistanceTo(pea.loc)
+            if distance < activeRangeSquared && distance > 0 {
                 // Move with
                 sum += pea.vel
                 count += 1
@@ -166,8 +177,8 @@ class Pea {
         var sum = Vector()
         var count = 0
         for pea in peas {
-            let distance = loc.distanceTo(pea.loc)
-            if distance < activeRange && distance > 0 {
+            let distance = loc.simpleDistanceTo(pea.loc)
+            if distance < activeRangeSquared && distance > 0 {
                 // Point toward
                 sum += pea.loc
                 count += 1
@@ -190,9 +201,14 @@ class Pea {
         return steer
     }
     
+    // Tally the number fo peas interacting this frame
+    func tallyInteractions(_ count: Int) {
+        currentInteractions = count
+    }
+    
     // MARK: - Display
     
-    func draw(to context: CGContext) {
+    func drawPath(to context: CGContext) {
         context.setStrokeColor(color)
         context.setLineWidth(depth * 5)
         PK.line(from: ploc.toCGPoint(), to: loc.toCGPoint(), in: context)
@@ -200,9 +216,9 @@ class Pea {
     
     func drawInteractionsWithLines(to context: CGContext, peas: [Pea]) {
         for pea in peas {
-            let distance = loc.distanceTo(pea.loc)
+            let distance = loc.simpleDistanceTo(pea.loc)
             context.setLineCap(.round)
-            if distance < activeRange && distance > 0 {
+            if distance < activeRangeSquared && distance > 0 {
                 context.setStrokeColor(color)
                 context.setLineWidth(depth * 5)
                 PK.line(from: loc.toCGPoint(), to: pea.loc.toCGPoint(), in: context)
@@ -212,8 +228,8 @@ class Pea {
     
     func drawInteractionsWithPolygons(to context: CGContext, peas: [Pea]) {
         for pea in peas {
-            let distance = loc.distanceTo(pea.loc)
-            if distance < activeRange && distance > 0 {
+            let distance = loc.simpleDistanceTo(pea.loc)
+            if distance < activeRangeSquared && distance > 0 {
                 context.setFillColor(color)
                 PK.polygon(from: [loc.toCGPoint(), pea.loc.toCGPoint(), pea.ploc.toCGPoint(), ploc.toCGPoint()], in: context)
             }

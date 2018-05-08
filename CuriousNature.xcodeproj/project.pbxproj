@@ -20,6 +20,7 @@
 		2212450420792CF4006DDFB1 /* CuriousNatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450320792CF4006DDFB1 /* CuriousNatureTests.swift */; };
 		2212450F20792DAE006DDFB1 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450E20792DAE006DDFB1 /* Vector.swift */; };
 		228E4B95209F654300C5626E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B94209F654300C5626E /* Environment.swift */; };
+		228E4B9720A123B800C5626E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9620A123B800C5626E /* Profile.swift */; };
 		22F14063208EC075006FBD4E /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F14062208EC075006FBD4E /* PrefsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		2212450520792CF4006DDFB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2212450E20792DAE006DDFB1 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		228E4B94209F654300C5626E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		228E4B9620A123B800C5626E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		22F14062208EC075006FBD4E /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 		22D2E23A20900B7E00AFB916 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				228E4B9620A123B800C5626E /* Profile.swift */,
 				228E4B94209F654300C5626E /* Environment.swift */,
 				220C770A20793EDA005E2242 /* Flock.swift */,
 				220C770820793EC9005E2242 /* Pea.swift */,
@@ -268,6 +271,7 @@
 				220C77122082598B005E2242 /* Extensions.swift in Sources */,
 				2212450F20792DAE006DDFB1 /* Vector.swift in Sources */,
 				221244F120792CF3006DDFB1 /* AppDelegate.swift in Sources */,
+				228E4B9720A123B800C5626E /* Profile.swift in Sources */,
 				220C770720793794005E2242 /* Canvas.swift in Sources */,
 				220C770B20793EDA005E2242 /* Flock.swift in Sources */,
 			);

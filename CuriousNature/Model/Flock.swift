@@ -17,11 +17,13 @@ class Flock {
     // MARK: - Properties
     var peas: [Pea]
     var alpha: CGFloat
+    var currentInteractions: Int
     
     // MARK: - Initializers
     init(with n: Int) {
         peas = [Pea]()
         alpha = 1.0
+        currentInteractions = 0
         populate(with: n)
     }
     
@@ -66,25 +68,21 @@ class Flock {
         }
     }
     
-    // MARK: - Updaters
-    
-    // Update peas based on random motion
-    func updateRandom(to context: CGContext) {
-        context.setAlpha(alpha)
-        for pea in peas {
-            pea.randomMotion()
-            pea.draw(to: context)
-        }
-    }
+    // MARK: - Updater
     
     // Update peas based on interactions
     func updateFlock(to context: CGContext) {
+        currentInteractions = 0
         context.setAlpha(alpha)
         for pea in peas {
             pea.update(seeking: peas)
+            currentInteractions += pea.currentInteractions
             pea.drawInteractionsWithPolygons(to: context, peas: peas)
-            pea.draw(to: context)
+            pea.drawPath(to: context)
         }
+        // Peas interact in pairs, so halve the counted interactions
+        currentInteractions /= 2
+        print(currentInteractions, "current interactions")
     }
     
 }
