@@ -6,37 +6,23 @@
 //  Copyright © 2018 Sam Richardson. All rights reserved.
 //
 
-import Foundation
+//
+// Profile stores a preferences configuration
+//
 
-// CGColor doesn't conform to Codable, this does
-struct CGColorComponents: Codable {
-    
-    var red, green, blue, alpha: CGFloat
-    
-    init(color: CGColor) {
-        red = color.components![0]
-        green = color.components![1]
-        blue = color.components![2]
-        alpha = color.components![3]
-    }
-    
-    func toCGColor() -> CGColor {
-        return CGColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
-    
-}
+import Foundation
 
 struct Profile: Codable {
     
     // MARK: - Environment Properties
-    var backgroundColor: CGColorComponents
+    var backgroundColor: CGColorCodable
     var shouldFade: Bool
     var fadeAlpha: CGFloat
     var fadeFrequency: Int
     
     // MARK: - Flock Properties
     var population: Int
-    var colors: [CGColorComponents]
+    var colors: [CGColorCodable]
     var alpha: CGFloat
     
     // MARK: - Interaction Properties
@@ -50,12 +36,12 @@ struct Profile: Codable {
     // MARK: - Initializer
     
     init() {
-        backgroundColor = CGColorComponents(color: CGColor(gray: 0.0, alpha: 1.0))
+        backgroundColor = CGColorCodable(color: CGColor(gray: 0.0, alpha: 1.0))
         shouldFade = true
         fadeAlpha = 0.01
         fadeFrequency = 5
         population = 30
-        colors = Array(count: 30) { CGColorComponents(color: CGColor.random()) }
+        colors = Array(count: 30) { CGColorCodable(color: CGColor.random()) }
         alpha = 0.2
         maximumSpeed = 10.0
         maximumForce = 0.1
@@ -66,12 +52,12 @@ struct Profile: Codable {
     }
     
     init(backgroundColor: CGColor, shouldFade: Bool, fadeAlpha: CGFloat, fadeFrequency: Int, population: Int, colors: [CGColor], alpha: CGFloat, maximumSpeed: CGFloat, maximumForce: CGFloat, separationWeight: CGFloat, alignmentWeight: CGFloat, cohesionWeight: CGFloat, activeRange: CGFloat) {
-        self.backgroundColor = CGColorComponents(color: backgroundColor)
+        self.backgroundColor = CGColorCodable(color: backgroundColor)
         self.shouldFade = shouldFade
         self.fadeAlpha = fadeAlpha
         self.fadeFrequency = fadeFrequency
         self.population = population
-        self.colors = colors.map() { CGColorComponents(color: $0) }
+        self.colors = colors.map() { CGColorCodable(color: $0) }
         self.alpha = alpha
         self.maximumSpeed = maximumSpeed
         self.maximumForce = maximumForce

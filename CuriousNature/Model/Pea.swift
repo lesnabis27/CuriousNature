@@ -12,7 +12,7 @@
 
 import Cocoa
 
-class Pea {
+class Pea: Codable {
     
     // MARK: - Properties
     
@@ -54,6 +54,53 @@ class Pea {
     
     convenience init() {
         self.init(atX: PK.randomCGFloat(upTo: PK.width), andY: PK.randomCGFloat(upTo: PK.height))
+    }
+    
+    // MARK: - Encoding
+    
+    enum CodingKeys: String, CodingKey {
+        case loc
+        case ploc
+        case vel
+        case acc
+        case depth
+        case color
+        case sepWeight
+        case aliWeight
+        case cohWeight
+        case activeRange
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        loc = try values.decode(Vector.self, forKey: .loc)
+        ploc = try values.decode(Vector.self, forKey: .ploc)
+        vel = try values.decode(Vector.self, forKey: .vel)
+        acc = try values.decode(Vector.self, forKey: .acc)
+        depth = try values.decode(CGFloat.self, forKey: .depth)
+        sepWeight = try values.decode(CGFloat.self, forKey: .sepWeight)
+        aliWeight = try values.decode(CGFloat.self, forKey: .aliWeight)
+        cohWeight = try values.decode(CGFloat.self, forKey: .cohWeight)
+        activeRange = try values.decode(CGFloat.self, forKey: .activeRange)
+        let codableColor = try values.decode(CGColorCodable.self, forKey: .color)
+        color = codableColor.toCGColor()
+        currentInteractions = 0
+        activeRangeSquared = activeRange * activeRange
+    }
+    
+    // Some properties are easily recalculated and don't need to be encoded
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(loc, forKey: .loc)
+        try container.encode(ploc, forKey: .ploc)
+        try container.encode(vel, forKey: .vel)
+        try container.encode(acc, forKey: .acc)
+        try container.encode(depth, forKey: .depth)
+        try container.encode(CGColorCodable(color: color), forKey: .color)
+        try container.encode(sepWeight, forKey: .sepWeight)
+        try container.encode(aliWeight, forKey: .aliWeight)
+        try container.encode(cohWeight, forKey: .cohWeight)
+        try container.encode(activeRange, forKey: .activeRange)
     }
     
     // MARK: - Motion

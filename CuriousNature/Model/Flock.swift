@@ -12,7 +12,7 @@
 
 import Foundation
 
-class Flock {
+class Flock: Codable {
     
     // MARK: - Properties
     var peas: [Pea]

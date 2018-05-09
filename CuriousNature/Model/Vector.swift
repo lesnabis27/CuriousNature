@@ -19,7 +19,7 @@ extension FloatingPoint {
     var radiansToDegrees: Self {return self * 180 / .pi}
 }
 
-public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equatable {
+public struct Vector: ExpressibleByArrayLiteral, CustomStringConvertible, Equatable, Codable {
     public var x: CGFloat, y: CGFloat
     
     public var description: String {

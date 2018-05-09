@@ -6,6 +6,8 @@
 //  Copyright © 2018 Sam Richardson. All rights reserved.
 //
 
+// TODO: - Make Environment codable
+
 import Cocoa
 
 class Environment {
