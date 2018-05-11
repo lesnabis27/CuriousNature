@@ -6,11 +6,11 @@
 //  Copyright © 2018 Sam Richardson. All rights reserved.
 //
 
-// TODO: - Make Environment codable
-
 import Cocoa
 
-class Environment {
+class Environment: Codable {
+    
+    // TODO: - Initialize context from a stored image during decoding
     
     // MARK: - Properties
     var context: CGContext?
@@ -36,7 +36,31 @@ class Environment {
         // Visual setup
         PK.background(in: context!, gray: 0.0)
     }
+    
+    // MARK: - Enoding
+    
+    enum CodingKeys: String, CodingKey {
+        case flock
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        flock = try values.decode(Flock.self, forKey: .flock)
+        context = CGContext(
+            data: nil,
+            width: Int(PK.width),
+            height: Int(PK.height),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
+    }
 
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(flock, forKey: .flock)
+    }
+    
     // MARK: - Update
     // Analogous to Processing's draw
     // Loops for the duration of the program
