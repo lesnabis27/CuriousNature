@@ -22,7 +22,11 @@
 		228E4B95209F654300C5626E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B94209F654300C5626E /* Environment.swift */; };
 		228E4B9720A123B800C5626E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9620A123B800C5626E /* Profile.swift */; };
 		228E4B9920A2700900C5626E /* CGColorCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9820A2700900C5626E /* CGColorCodable.swift */; };
-		22F14063208EC075006FBD4E /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F14062208EC075006FBD4E /* PrefsViewController.swift */; };
+		22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */; };
+		22EA74C920A87F09005B24C8 /* EnvironmentPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */; };
+		22EA74CB20A87F30005B24C8 /* FlockPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */; };
+		22EA74CE20A87F4B005B24C8 /* InteractionsPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74CC20A87F4B005B24C8 /* InteractionsPrefsViewController.swift */; };
+		22EA74D120A87F7E005B24C8 /* ProfilePrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74D020A87F7E005B24C8 /* ProfilePrefsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +60,11 @@
 		228E4B94209F654300C5626E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		228E4B9620A123B800C5626E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		228E4B9820A2700900C5626E /* CGColorCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGColorCodable.swift; sourceTree = "<group>"; };
-		22F14062208EC075006FBD4E /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
+		22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
+		22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentPrefsViewController.swift; sourceTree = "<group>"; };
+		22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockPrefsViewController.swift; sourceTree = "<group>"; };
+		22EA74CC20A87F4B005B24C8 /* InteractionsPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsPrefsViewController.swift; sourceTree = "<group>"; };
+		22EA74D020A87F7E005B24C8 /* ProfilePrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePrefsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +143,11 @@
 			isa = PBXGroup;
 			children = (
 				221244F220792CF3006DDFB1 /* ViewController.swift */,
-				22F14062208EC075006FBD4E /* PrefsViewController.swift */,
+				22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */,
+				22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */,
+				22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */,
+				22EA74CC20A87F4B005B24C8 /* InteractionsPrefsViewController.swift */,
+				22EA74D020A87F7E005B24C8 /* ProfilePrefsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -284,13 +296,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				220C770920793EC9005E2242 /* Pea.swift in Sources */,
+				22EA74CE20A87F4B005B24C8 /* InteractionsPrefsViewController.swift in Sources */,
+				22EA74CB20A87F30005B24C8 /* FlockPrefsViewController.swift in Sources */,
 				228E4B95209F654300C5626E /* Environment.swift in Sources */,
-				22F14063208EC075006FBD4E /* PrefsViewController.swift in Sources */,
 				220C7710207FFC9A005E2242 /* ProcessKit.swift in Sources */,
 				221244F320792CF3006DDFB1 /* ViewController.swift in Sources */,
+				22EA74D120A87F7E005B24C8 /* ProfilePrefsViewController.swift in Sources */,
 				220C77122082598B005E2242 /* Extensions.swift in Sources */,
 				2212450F20792DAE006DDFB1 /* Vector.swift in Sources */,
 				221244F120792CF3006DDFB1 /* AppDelegate.swift in Sources */,
+				22EA74C920A87F09005B24C8 /* EnvironmentPrefsViewController.swift in Sources */,
+				22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */,
 				228E4B9720A123B800C5626E /* Profile.swift in Sources */,
 				220C770720793794005E2242 /* Canvas.swift in Sources */,
 				228E4B9920A2700900C5626E /* CGColorCodable.swift in Sources */,

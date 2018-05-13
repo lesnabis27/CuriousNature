@@ -1,5 +1,5 @@
 //
-//  PrefsViewController.swift
+//  ProfilePrefsViewController.swift
 //  CuriousNature
 //
 //  Created by Sam Richardson on 5/13/18.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PrefsViewController: NSTabViewController {
+class ProfilePrefsViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

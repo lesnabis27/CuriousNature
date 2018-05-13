@@ -23,7 +23,6 @@ struct Profile: Codable {
     // MARK: - Flock Properties
     var population: Int
     var colors: [CGColorCodable]
-    var alpha: CGFloat
     
     // MARK: - Interaction Properties
     var maximumSpeed: CGFloat
@@ -42,7 +41,6 @@ struct Profile: Codable {
         fadeFrequency = 5
         population = 30
         colors = Array(count: 30) { CGColorCodable(color: CGColor.random()) }
-        alpha = 0.2
         maximumSpeed = 10.0
         maximumForce = 0.1
         separationWeight = 1.0
@@ -51,14 +49,13 @@ struct Profile: Codable {
         activeRange = 50.0
     }
     
-    init(backgroundColor: CGColor, shouldFade: Bool, fadeAlpha: CGFloat, fadeFrequency: Int, population: Int, colors: [CGColor], alpha: CGFloat, maximumSpeed: CGFloat, maximumForce: CGFloat, separationWeight: CGFloat, alignmentWeight: CGFloat, cohesionWeight: CGFloat, activeRange: CGFloat) {
+    init(backgroundColor: CGColor, shouldFade: Bool, fadeAlpha: CGFloat, fadeFrequency: Int, population: Int, colors: [CGColor], alpha: CGFloat, maximumDepth: CGFloat, minimumDepth: CGFloat, maximumSpeed: CGFloat, maximumForce: CGFloat, separationWeight: CGFloat, alignmentWeight: CGFloat, cohesionWeight: CGFloat, activeRange: CGFloat) {
         self.backgroundColor = CGColorCodable(color: backgroundColor)
         self.shouldFade = shouldFade
         self.fadeAlpha = fadeAlpha
         self.fadeFrequency = fadeFrequency
         self.population = population
         self.colors = colors.map() { CGColorCodable(color: $0) }
-        self.alpha = alpha
         self.maximumSpeed = maximumSpeed
         self.maximumForce = maximumForce
         self.separationWeight = separationWeight
