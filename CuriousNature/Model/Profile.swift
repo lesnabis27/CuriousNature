@@ -12,7 +12,7 @@
 
 import Foundation
 
-struct Profile: Codable {
+class Profile: Codable {
     
     // MARK: - Environment Properties
     var backgroundColor: CGColorCodable
