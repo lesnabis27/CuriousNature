@@ -20,21 +20,7 @@ class Pea: Codable {
     let depth: CGFloat // PREF
     var color: CGColor // PREF
     var currentInteractions: Int
-    
-    // Flocking properties
-    var sepWeight, aliWeight, cohWeight: CGFloat
-    var activeRange: CGFloat {
-        didSet {
-            activeRangeSquared = activeRange * activeRange
-        }
-    }
-    var activeRangeSquared: CGFloat
-    
-    // MARK: - Static Properties
-    
-    static let maximumSpeed: CGFloat = 10.0 // PREF
-    static let maximumForce: CGFloat = 0.1 // PREF
-    
+
     // MARK: - Initializers
     
     init(atX x: CGFloat, andY y: CGFloat) {
@@ -43,17 +29,12 @@ class Pea: Codable {
         vel = Vector.random2D()
         acc = [0, 0]
         depth = CGFloat.random()
-        color = CGColor.random()
+        color = state.colors.randomItem()!.toCGColor()
         currentInteractions = 0
-        sepWeight = 1.0
-        aliWeight = 1.7
-        cohWeight = 1.5
-        activeRange = 50
-        activeRangeSquared = activeRange * activeRange
     }
     
     convenience init() {
-        self.init(atX: PK.randomCGFloat(upTo: PK.width), andY: PK.randomCGFloat(upTo: PK.height))
+        self.init(atX: PK.randomCGFloat(upTo: state.xResolution), andY: PK.randomCGFloat(upTo: state.yResolution))
     }
     
     // MARK: - Encoding
@@ -65,10 +46,6 @@ class Pea: Codable {
         case acc
         case depth
         case color
-        case sepWeight
-        case aliWeight
-        case cohWeight
-        case activeRange
     }
     
     required init(from decoder: Decoder) throws {
@@ -78,14 +55,9 @@ class Pea: Codable {
         vel = try values.decode(Vector.self, forKey: .vel)
         acc = try values.decode(Vector.self, forKey: .acc)
         depth = try values.decode(CGFloat.self, forKey: .depth)
-        sepWeight = try values.decode(CGFloat.self, forKey: .sepWeight)
-        aliWeight = try values.decode(CGFloat.self, forKey: .aliWeight)
-        cohWeight = try values.decode(CGFloat.self, forKey: .cohWeight)
-        activeRange = try values.decode(CGFloat.self, forKey: .activeRange)
         let codableColor = try values.decode(CGColorCodable.self, forKey: .color)
         color = codableColor.toCGColor()
         currentInteractions = 0
-        activeRangeSquared = activeRange * activeRange
     }
     
     // Some properties are easily recalculated and don't need to be encoded
@@ -97,10 +69,6 @@ class Pea: Codable {
         try container.encode(acc, forKey: .acc)
         try container.encode(depth, forKey: .depth)
         try container.encode(CGColorCodable(color: color), forKey: .color)
-        try container.encode(sepWeight, forKey: .sepWeight)
-        try container.encode(aliWeight, forKey: .aliWeight)
-        try container.encode(cohWeight, forKey: .cohWeight)
-        try container.encode(activeRange, forKey: .activeRange)
     }
     
     // MARK: - Motion
@@ -109,12 +77,11 @@ class Pea: Codable {
         flock(peas)
         move()
         wrap()
-        //bounce()
     }
     
     func move() {
         vel += acc
-        vel = vel.limit(Pea.maximumSpeed)
+        vel = vel.limit(state.maximumSpeed)
         ploc = loc
         loc += vel
     }
@@ -126,25 +93,25 @@ class Pea: Codable {
     }
     
     func bounce() {
-        if loc.x > PK.width || loc.x < 0 {vel.x *= -1}
-        if loc.y > PK.height || loc.y < 0 {vel.y *= -1}
+        if loc.x > state.xResolution || loc.x < 0 {vel.x *= -1}
+        if loc.y > state.yResolution || loc.y < 0 {vel.y *= -1}
     }
     
     func wrap() {
-        if (loc.x > PK.width && ploc.x > PK.width) {
+        if (loc.x > state.xResolution && ploc.x > state.xResolution) {
             loc.x = 0
             ploc.x = loc.x
         }
         else if (loc.x < 0 && ploc.x < 0) {
-            loc.x = PK.width
+            loc.x = state.xResolution
             ploc.x = loc.x
         }
-        if (loc.y > PK.height && ploc.y > PK.height) {
+        if (loc.y > state.yResolution && ploc.y > state.yResolution) {
             loc.y = 0
             ploc.y = loc.y
         }
         else if (loc.y < 0 && ploc.y < 0) {
-            loc.y = PK.height
+            loc.y = state.yResolution
             ploc.y = loc.y
         }
     }
@@ -159,9 +126,9 @@ class Pea: Codable {
         var sep = separate(peas)
         var ali = align(peas)
         var coh = cohesion(peas)
-        sep *= sepWeight // PREF
-        ali *= aliWeight // PREF
-        coh *= cohWeight // PREF
+        sep *= state.separationWeight // PREF
+        ali *= state.alignmentWeight // PREF
+        coh *= state.cohesionWeight // PREF
         applyForce(force: sep)
         applyForce(force: ali)
         applyForce(force: coh)
@@ -173,7 +140,7 @@ class Pea: Codable {
         var count = 0
         for pea in peas {
             let distance = loc.distanceTo(pea.loc)
-            if distance < activeRange && distance > 0 {
+            if distance < state.activeRange && distance > 0 {
                 // Point away
                 var difference = loc - pea.loc
                 difference = difference.normalize()
@@ -187,9 +154,9 @@ class Pea: Codable {
             steer /= CGFloat(count)
         }
         if steer.magnitude > 0 {
-            steer.magnitude = Pea.maximumSpeed
+            steer.magnitude = state.maximumSpeed
             steer -= vel
-            steer = steer.limit(Pea.maximumForce)
+            steer = steer.limit(state.maximumForce)
         }
         // Tally interactions here to reduce cpu footprint
         tallyInteractions(count)
@@ -202,7 +169,7 @@ class Pea: Codable {
         var count = 0
         for pea in peas {
             let distance = loc.simpleDistanceTo(pea.loc)
-            if distance < activeRangeSquared && distance > 0 {
+            if distance < (state.activeRangeSquared) && distance > 0 {
                 // Move with
                 sum += pea.vel
                 count += 1
@@ -211,9 +178,9 @@ class Pea: Codable {
         // Average the sum vector
         if count > 0 {
             sum /= CGFloat(count)
-            sum.magnitude = Pea.maximumSpeed
+            sum.magnitude = state.maximumSpeed
             var steer = sum - vel
-            steer = steer.limit(Pea.maximumForce)
+            steer = steer.limit(state.maximumForce)
             return steer
         }
         return Vector()
@@ -225,7 +192,7 @@ class Pea: Codable {
         var count = 0
         for pea in peas {
             let distance = loc.simpleDistanceTo(pea.loc)
-            if distance < activeRangeSquared && distance > 0 {
+            if distance < (state.activeRangeSquared) && distance > 0 {
                 // Point toward
                 sum += pea.loc
                 count += 1
@@ -242,9 +209,9 @@ class Pea: Codable {
     // Calculate a steering vector toward a target vector
     func seek(_ target: Vector) -> Vector {
         var heading = target - loc // Vector pointing toward target
-        heading.magnitude = Pea.maximumSpeed
+        heading.magnitude = state.maximumSpeed
         var steer = heading - vel // Steering force
-        steer = steer.limit(Pea.maximumForce)
+        steer = steer.limit(state.maximumForce)
         return steer
     }
     
@@ -265,7 +232,7 @@ class Pea: Codable {
         for pea in peas {
             let distance = loc.simpleDistanceTo(pea.loc)
             context.setLineCap(.round)
-            if distance < activeRangeSquared && distance > 0 {
+            if distance < (state.activeRange * state.activeRange) && distance > 0 {
                 context.setStrokeColor(color)
                 context.setLineWidth(depth * 5)
                 PK.line(from: loc.toCGPoint(), to: pea.loc.toCGPoint(), in: context)
@@ -276,7 +243,7 @@ class Pea: Codable {
     func drawInteractionsWithPolygons(to context: CGContext, peas: [Pea]) {
         for pea in peas {
             let distance = loc.simpleDistanceTo(pea.loc)
-            if distance < activeRangeSquared && distance > 0 {
+            if distance < (state.activeRangeSquared) && distance > 0 {
                 context.setFillColor(color)
                 PK.polygon(from: [loc.toCGPoint(), pea.loc.toCGPoint(), pea.ploc.toCGPoint(), ploc.toCGPoint()], in: context)
             }

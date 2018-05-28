@@ -8,33 +8,36 @@
 
 import Cocoa
 
+// Global State
+
+let state = Profile()
+
 class Environment: Codable {
     
-    // TODO: - Initialize context from a stored image during decoding
-    
     // MARK: - Properties
+    
     var context: CGContext?
-    var subtimer = 0 // PREF
-    var flock: Flock // PREF
+    var subtimer = 0
+    var flock: Flock
 
     // MARK: - Initializer
+    
     init() {
         context = CGContext(
             data: nil,
-            width: Int(PK.width),
-            height: Int(PK.height),
+            width: Int(state.xResolution),
+            height: Int(state.yResolution),
             bitsPerComponent: 8,
             bytesPerRow: 0,
             space: CGColorSpaceCreateDeviceRGB(),
             bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
         
         // Flock setup
-        flock = Flock(with: 30)
-        flock.setFlockingParameters(separate: nil, align: nil, cohesion: nil, range: 50)
+        flock = Flock()
         flock.alpha = 0.2
         
         // Visual setup
-        PK.background(in: context!, gray: 0.0)
+        PK.background(in: context!)
     }
     
     // MARK: - Enoding
@@ -48,8 +51,8 @@ class Environment: Codable {
         flock = try values.decode(Flock.self, forKey: .flock)
         context = CGContext(
             data: nil,
-            width: Int(PK.width),
-            height: Int(PK.height),
+            width: Int(state.xResolution),
+            height: Int(state.yResolution),
             bitsPerComponent: 8,
             bytesPerRow: 0,
             space: CGColorSpaceCreateDeviceRGB(),
@@ -65,20 +68,29 @@ class Environment: Codable {
     // Analogous to Processing's draw
     // Loops for the duration of the program
     func update() {
-        subtimer += 1
-        if subtimer % 5 == 0 {
-            PK.fadeBackground(in: context!, gray: 0.0, alpha: 0.01)
-            subtimer = 0
+        if state.shouldFade {
+            subtimer += 1
+            if subtimer % state.fadeFrequency == 0 {
+                PK.fadeBackground(in: context!)
+                subtimer = 0
+            }
         }
         flock.updateFlock(to: context!)
     }
 
     // MARK: - Context
+    
+    func changeResolution() {
+        releaseContext()
+        createContext()
+        PK.background(in: context!)
+    }
+    
     func createContext() {
         context = CGContext(
             data: nil,
-            width: Int(PK.width),
-            height: Int(PK.height),
+            width: Int(state.xResolution),
+            height: Int(state.yResolution),
             bitsPerComponent: 8,
             bytesPerRow: 0,
             space: CGColorSpaceCreateDeviceRGB(),
@@ -92,7 +104,7 @@ class Environment: Codable {
     func clearCanvas(view: Canvas) {
         releaseContext()
         createContext()
-        PK.background(in: context!, gray: 0.05)
+        PK.background(in: context!)
         view.update(from: context)
     }
     

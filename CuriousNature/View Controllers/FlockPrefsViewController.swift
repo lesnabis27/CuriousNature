@@ -18,15 +18,17 @@ class FlockPrefsViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     // MARK: - IBActions
     
-    @IBAction func populationFieldChanged(_ sender: Any) {
+    @IBAction func populationFieldChanged(_ sender: NSTextField) {
+        state.population = Int(sender.intValue)
+        NotificationCenter.default.post(name: .populationChanged, object: nil)
     }
-    @IBAction func addColor(_ sender: Any) {
+    @IBAction func addColor(_ sender: NSButton) {
         colorTableView.reloadData()
     }
-    @IBAction func removeColor(_ sender: Any) {
+    @IBAction func removeColor(_ sender: NSButton) {
         colorTableView.reloadData()
     }
-    @IBAction func randomizeColors(_ sender: Any) {
+    @IBAction func randomizeColors(_ sender: NSButton) {
         colorTableView.reloadData()
     }
     
@@ -38,6 +40,7 @@ class FlockPrefsViewController: NSViewController, NSTableViewDelegate, NSTableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        populationField.stringValue = "\(state.population)"
     }
     
     // MARK: - Table View

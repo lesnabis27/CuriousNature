@@ -12,35 +12,30 @@ import Cocoa
 
 struct PK {
     
-    public static var width: CGFloat {
-        return NSScreen.main!.frame.width
-    }
-    
-    public static var width2x: CGFloat {
-        return width * 2
-    }
-    
-    public static var height: CGFloat {
-        return NSScreen.main!.frame.height
-    }
-    
-    public static var height2x: CGFloat {
-        return height * 2
-    }
-    
     public static func background(in context: CGContext, red: CGFloat, green: CGFloat, blue: CGFloat) {
         context.setFillColor(red: red, green: green, blue: blue, alpha: 1.0)
-        context.fill(CGRect.init(x: 0, y: 0, width: width, height: height))
+        context.fill(CGRect.init(x: 0, y: 0, width: state.xResolution, height: state.yResolution))
     }
     
     public static func background(in context: CGContext, gray: CGFloat) {
         context.setFillColor(gray: gray, alpha: 1.0)
-        context.fill(CGRect.init(x: 0, y: 0, width: width, height: height))
+        context.fill(CGRect.init(x: 0, y: 0, width: state.xResolution, height: state.yResolution))
+    }
+    
+    public static func background(in context: CGContext) {
+        context.setFillColor(state.backgroundColor.toCGColor())
+        context.fill(CGRect.init(x: 0, y: 0, width: state.xResolution, height: state.yResolution))
     }
     
     public static func fadeBackground(in context: CGContext, gray: CGFloat, alpha: CGFloat) {
         context.setFillColor(gray: gray, alpha: alpha)
-        context.fill(CGRect.init(x: 0, y: 0, width: width, height: width))
+        context.fill(CGRect.init(x: 0, y: 0, width: state.xResolution, height: state.yResolution))
+    }
+    
+    public static func fadeBackground(in context: CGContext) {
+        context.setFillColor(state.backgroundColor.toCGColor())
+        context.setAlpha(state.fadeAlpha)
+        context.fill(CGRect.init(x: 0, y: 0, width: state.xResolution, height: state.yResolution))
     }
     
     public static func line(from begin: CGPoint, to end: CGPoint, in context: CGContext) {

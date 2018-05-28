@@ -25,8 +25,9 @@ extension NSImage {
 }
 
 extension Notification.Name {
-    static let timerStart = Notification.Name("timerStart")
-    static let timerStop = Notification.Name("timerStop")
+    static let colorsChanged = Notification.Name("colorsChanged")
+    static let populationChanged = Notification.Name("populationChanged")
+    static let resolutionChanged = Notification.Name("resolutionChanged")
 }
 
 extension Array {

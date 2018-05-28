@@ -29,7 +29,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     // MARK: - Properties
-    var environment = Environment()
+    lazy var environment = Environment()
     var timer = Timer()
     var mouseTimer = 0
     var mouseShouldBeHidden = false
@@ -52,6 +52,9 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(changePopulation), name: .populationChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeColors), name: .colorsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeResolution), name: .resolutionChanged, object: nil)
         startTimer()
     }
     
@@ -62,6 +65,19 @@ class ViewController: NSViewController, NSWindowDelegate {
     override var representedObject: Any? {
         didSet {
         }
+    }
+    
+    // MARK: - Methods
+    @objc func changePopulation() {
+        environment.flock.changePopulation()
+    }
+    
+    @objc func changeColors() {
+        environment.flock.color()
+    }
+    
+    @objc func changeResolution() {
+        environment.changeResolution()
     }
     
     // MARK: - NSWindowDelegate

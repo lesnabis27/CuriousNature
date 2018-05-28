@@ -20,18 +20,39 @@ class Flock: Codable {
     var currentInteractions: Int
     
     // MARK: - Initializers
-    init(with n: Int) {
+    init() {
         peas = [Pea]()
         alpha = 1.0
         currentInteractions = 0
-        populate(with: n)
+        populate()
     }
     
     // MARK: - Methods
-    func populate(with n: Int) {
-        for _ in 0..<n {
+    func populate() {
+        for _ in 0..<state.population {
             peas.append(Pea())
         }
+    }
+    
+    func changePopulation() {
+        let difference = state.population - peas.count
+        if difference > 0 {
+            addPeas(count: difference)
+            print("Added", difference, "peas")
+        } else if difference < 0 {
+            removePeas(count: abs(difference))
+            print("Removed", abs(difference), "peas")
+        }
+    }
+    
+    func addPeas(count: Int) {
+        for _ in 0..<count {
+            peas.append(Pea())
+        }
+    }
+    
+    func removePeas(count: Int) {
+        peas.removeLast(count)
     }
     
     // Give peas a singular color
@@ -50,20 +71,11 @@ class Flock: Codable {
         }
     }
     
-    // Set flocking properties
-    func setFlockingParameters(separate: CGFloat?, align: CGFloat?, cohesion: CGFloat?, range: CGFloat?) {
-        for pea in peas {
-            if let sep = separate {
-                pea.sepWeight = sep
-            }
-            if let ali = align {
-                pea.aliWeight = ali
-            }
-            if let coh = cohesion {
-                pea.cohWeight = coh
-            }
-            if let rng = range {
-                pea.activeRange = rng
+    // Recolor peas from state
+    func color() {
+        if !state.colors.isEmpty {
+            for pea in peas {
+                pea.color = state.colors.randomItem()!.toCGColor()
             }
         }
     }
@@ -82,7 +94,7 @@ class Flock: Codable {
         }
         // Peas interact in pairs, so halve the counted interactions
         currentInteractions /= 2
-        print(currentInteractions, "current interactions")
+        //print(currentInteractions, "current interactions")
     }
     
 }

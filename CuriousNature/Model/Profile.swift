@@ -10,7 +10,7 @@
 // Profile stores a preferences configuration
 //
 
-import Foundation
+import Cocoa
 
 class Profile: Codable {
     
@@ -19,6 +19,8 @@ class Profile: Codable {
     var shouldFade: Bool
     var fadeAlpha: CGFloat
     var fadeFrequency: Int
+    var xResolution: CGFloat
+    var yResolution: CGFloat
     
     // MARK: - Flock Properties
     var population: Int
@@ -31,6 +33,7 @@ class Profile: Codable {
     var alignmentWeight: CGFloat
     var cohesionWeight: CGFloat
     var activeRange: CGFloat
+    var activeRangeSquared: CGFloat
     
     // MARK: - Initializer
     
@@ -39,6 +42,8 @@ class Profile: Codable {
         shouldFade = true
         fadeAlpha = 0.01
         fadeFrequency = 5
+        xResolution = NSScreen.main!.frame.width
+        yResolution = NSScreen.main!.frame.height
         population = 30
         colors = Array(count: 30) { CGColorCodable(color: CGColor.random()) }
         maximumSpeed = 10.0
@@ -47,13 +52,16 @@ class Profile: Codable {
         alignmentWeight = 1.7
         cohesionWeight = 1.5
         activeRange = 50.0
+        activeRangeSquared = activeRange * activeRange
     }
     
-    init(backgroundColor: CGColor, shouldFade: Bool, fadeAlpha: CGFloat, fadeFrequency: Int, population: Int, colors: [CGColor], alpha: CGFloat, maximumDepth: CGFloat, minimumDepth: CGFloat, maximumSpeed: CGFloat, maximumForce: CGFloat, separationWeight: CGFloat, alignmentWeight: CGFloat, cohesionWeight: CGFloat, activeRange: CGFloat) {
+    init(backgroundColor: CGColor, shouldFade: Bool, fadeAlpha: CGFloat, fadeFrequency: Int, xResolution: CGFloat, yResolution: CGFloat, population: Int, colors: [CGColor], alpha: CGFloat, maximumDepth: CGFloat, minimumDepth: CGFloat, maximumSpeed: CGFloat, maximumForce: CGFloat, separationWeight: CGFloat, alignmentWeight: CGFloat, cohesionWeight: CGFloat, activeRange: CGFloat) {
         self.backgroundColor = CGColorCodable(color: backgroundColor)
         self.shouldFade = shouldFade
         self.fadeAlpha = fadeAlpha
         self.fadeFrequency = fadeFrequency
+        self.xResolution = xResolution
+        self.yResolution = yResolution
         self.population = population
         self.colors = colors.map() { CGColorCodable(color: $0) }
         self.maximumSpeed = maximumSpeed
@@ -62,6 +70,7 @@ class Profile: Codable {
         self.alignmentWeight = alignmentWeight
         self.cohesionWeight = cohesionWeight
         self.activeRange = activeRange
+        activeRangeSquared = activeRange * activeRange
     }
     
 }
