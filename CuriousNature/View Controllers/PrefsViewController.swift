@@ -12,6 +12,7 @@ class PrefsViewController: NSTabViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSCursor.unhide()
     }
     
 }

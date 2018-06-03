@@ -17,8 +17,8 @@ class Pea: Codable {
     // MARK: - Properties
     
     var loc, ploc, vel, acc: Vector
-    let depth: CGFloat // PREF
-    var color: CGColor // PREF
+    var depth: CGFloat
+    var color: CGColor
     var currentInteractions: Int
 
     // MARK: - Initializers
@@ -28,7 +28,7 @@ class Pea: Codable {
         ploc = [x, y]
         vel = Vector.random2D()
         acc = [0, 0]
-        depth = CGFloat.random()
+        depth = CGFloat.random(from: state.minDepth, to: state.maxDepth)
         color = state.colors.randomItem()!.toCGColor()
         currentInteractions = 0
     }
@@ -224,7 +224,7 @@ class Pea: Codable {
     
     func drawPath(to context: CGContext) {
         context.setStrokeColor(color)
-        context.setLineWidth(depth * 5)
+        context.setLineWidth(depth)
         PK.line(from: ploc.toCGPoint(), to: loc.toCGPoint(), in: context)
     }
     

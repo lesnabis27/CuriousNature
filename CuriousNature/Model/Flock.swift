@@ -55,6 +55,13 @@ class Flock: Codable {
         peas.removeLast(count)
     }
     
+    // Give peas new depths
+    func updateDepth() {
+        for pea in peas {
+            pea.depth = CGFloat.random(from: state.minDepth, to: state.maxDepth)
+        }
+    }
+    
     // Give peas a singular color
     func color(_ color: CGColor) {
         for pea in peas {

@@ -22,6 +22,8 @@
 		228E4B95209F654300C5626E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B94209F654300C5626E /* Environment.swift */; };
 		228E4B9720A123B800C5626E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9620A123B800C5626E /* Profile.swift */; };
 		228E4B9920A2700900C5626E /* CGColorCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9820A2700900C5626E /* CGColorCodable.swift */; };
+		22D57E9220C439AE00FCE5E0 /* Soundtrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */; };
+		22D57E9420C4641400FCE5E0 /* NPS.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22D57E9320C4641300FCE5E0 /* NPS.m4a */; };
 		22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */; };
 		22EA74C920A87F09005B24C8 /* EnvironmentPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */; };
 		22EA74CB20A87F30005B24C8 /* FlockPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */; };
@@ -60,6 +62,8 @@
 		228E4B94209F654300C5626E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		228E4B9620A123B800C5626E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		228E4B9820A2700900C5626E /* CGColorCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGColorCodable.swift; sourceTree = "<group>"; };
+		22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soundtrack.swift; sourceTree = "<group>"; };
+		22D57E9320C4641300FCE5E0 /* NPS.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = NPS.m4a; sourceTree = "<group>"; };
 		22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentPrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockPrefsViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				22D2E23D2090127900AFB916 /* Views */,
 				22D2E23A20900B7E00AFB916 /* Model */,
 				221244F420792CF4006DDFB1 /* Assets.xcassets */,
+				22D57E9520C4999200FCE5E0 /* Sounds */,
 				221244F620792CF4006DDFB1 /* Main.storyboard */,
 				221244F920792CF4006DDFB1 /* Info.plist */,
 				221244FA20792CF4006DDFB1 /* CuriousNature.entitlements */,
@@ -155,6 +160,7 @@
 		22D2E23A20900B7E00AFB916 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */,
 				228E4B9620A123B800C5626E /* Profile.swift */,
 				228E4B94209F654300C5626E /* Environment.swift */,
 				220C770A20793EDA005E2242 /* Flock.swift */,
@@ -171,6 +177,14 @@
 				220C770620793794005E2242 /* Canvas.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		22D57E9520C4999200FCE5E0 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				22D57E9320C4641300FCE5E0 /* NPS.m4a */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D57E9420C4641400FCE5E0 /* NPS.m4a in Resources */,
 				221244F520792CF4006DDFB1 /* Assets.xcassets in Resources */,
 				221244F820792CF4006DDFB1 /* Main.storyboard in Resources */,
 			);
@@ -298,6 +313,7 @@
 				220C770920793EC9005E2242 /* Pea.swift in Sources */,
 				22EA74CE20A87F4B005B24C8 /* InteractionsPrefsViewController.swift in Sources */,
 				22EA74CB20A87F30005B24C8 /* FlockPrefsViewController.swift in Sources */,
+				22D57E9220C439AE00FCE5E0 /* Soundtrack.swift in Sources */,
 				228E4B95209F654300C5626E /* Environment.swift in Sources */,
 				220C7710207FFC9A005E2242 /* ProcessKit.swift in Sources */,
 				221244F320792CF3006DDFB1 /* ViewController.swift in Sources */,

@@ -20,10 +20,12 @@ class EnvironmentPrefsViewController: NSViewController {
     @IBOutlet weak var resolutionPopupButton: NSPopUpButton!
     @IBOutlet weak var xResolutionTextField: NSTextField!
     @IBOutlet weak var yResolutionTextField: NSTextField!
-
+    @IBOutlet weak var borderWidthTextField: NSTextField!
+    
     // MARK: - IBActions
     @IBAction func backgroundColorWellChanged(_ sender: NSColorWell) {
         state.backgroundColor = CGColorCodable(color: sender.color.cgColor)
+        NotificationCenter.default.post(name: .backgroundColorChanged, object: nil)
     }
     @IBAction func fadeCheckboxChanged(_ sender: NSButton) {
         if sender.state == .on {
@@ -55,18 +57,18 @@ class EnvironmentPrefsViewController: NSViewController {
     @IBAction func resolutionPopupButtonChanged(_ sender: NSPopUpButton) {
         switch sender.titleOfSelectedItem! {
             case "Standard":
-                state.xResolution = NSScreen.main!.frame.width
-                state.yResolution = NSScreen.main!.frame.height
-                xResolutionTextField.stringValue = "\(state.xResolution)"
-                yResolutionTextField.stringValue = "\(state.yResolution)"
+                state.xResolution = NSScreen.main!.frame.width - state.border * 2
+                state.yResolution = NSScreen.main!.frame.height - state.border * 2
+                xResolutionTextField.stringValue = "\(state.xResolution + state.border * 2)"
+                yResolutionTextField.stringValue = "\(state.yResolution + state.border * 2)"
                 xResolutionTextField.isEnabled = false
                 yResolutionTextField.isEnabled = false
                 NotificationCenter.default.post(name: .resolutionChanged, object: nil)
             case "Retina":
-                state.xResolution = NSScreen.main!.frame.width * 2
-                state.yResolution = NSScreen.main!.frame.height * 2
-                xResolutionTextField.stringValue = "\(state.xResolution)"
-                yResolutionTextField.stringValue = "\(state.yResolution)"
+                state.xResolution = NSScreen.main!.frame.width * 2 - state.border * 2
+                state.yResolution = NSScreen.main!.frame.height * 2 - state.border * 2
+                xResolutionTextField.stringValue = "\(state.xResolution + state.border * 2)"
+                yResolutionTextField.stringValue = "\(state.yResolution + state.border * 2)"
                 xResolutionTextField.isEnabled = false
                 yResolutionTextField.isEnabled = false
                 NotificationCenter.default.post(name: .resolutionChanged, object: nil)
@@ -76,11 +78,17 @@ class EnvironmentPrefsViewController: NSViewController {
         }
     }
     @IBAction func xResolutionTextFieldChanged(_ sender: NSTextField) {
-        state.xResolution = CGFloat(sender.floatValue)
+        state.xResolution = CGFloat(sender.floatValue) - state.border * 2
         NotificationCenter.default.post(name: .resolutionChanged, object: nil)
     }
     @IBAction func yResolutionTextFieldChanged(_ sender: NSTextField) {
-        state.yResolution = CGFloat(sender.floatValue)
+        state.yResolution = CGFloat(sender.floatValue) - state.border * 2
+        NotificationCenter.default.post(name: .resolutionChanged, object: nil)
+    }
+    @IBAction func borderWidthTextFieldChanged(_ sender: NSTextField) {
+        state.border = CGFloat(sender.floatValue)
+        state.xResolution = state.xResolution - state.border * 2
+        state.yResolution = state.yResolution - state.border * 2
         NotificationCenter.default.post(name: .resolutionChanged, object: nil)
     }
     
@@ -95,13 +103,13 @@ class EnvironmentPrefsViewController: NSViewController {
         fadeFrequencySlider.floatValue = Float(state.fadeFrequency)
         
         // Resolution controls
-        xResolutionTextField.stringValue = "\(state.xResolution)"
-        yResolutionTextField.stringValue = "\(state.yResolution)"
-        if state.xResolution == NSScreen.main!.frame.width && state.yResolution == NSScreen.main!.frame.height {
+        xResolutionTextField.stringValue = "\(state.xResolution + state.border * 2)"
+        yResolutionTextField.stringValue = "\(state.yResolution + state.border * 2)"
+        if state.xResolution + state.border * 2 == NSScreen.main!.frame.width && state.yResolution + state.border * 2 == NSScreen.main!.frame.height {
             resolutionPopupButton.selectItem(withTitle: "Standard")
             xResolutionTextField.isEnabled = false
             yResolutionTextField.isEnabled = false
-        } else if state.xResolution == NSScreen.main!.frame.width * 2 && state.yResolution == NSScreen.main!.frame.height * 2 {
+        } else if state.xResolution + state.border * 2 == NSScreen.main!.frame.width * 2 && state.yResolution + state.border * 2 == NSScreen.main!.frame.height * 2 {
             resolutionPopupButton.selectItem(withTitle: "Retina")
             xResolutionTextField.isEnabled = false
             yResolutionTextField.isEnabled = false
@@ -110,6 +118,7 @@ class EnvironmentPrefsViewController: NSViewController {
             xResolutionTextField.isEnabled = true
             yResolutionTextField.isEnabled = true
         }
+        borderWidthTextField.stringValue = "\(state.border)"
         
         // Enable or disable controls
         if state.shouldFade {

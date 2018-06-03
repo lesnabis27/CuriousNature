@@ -30,6 +30,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - Properties
     lazy var environment = Environment()
+    lazy var soundtrack = Soundtrack()
     var timer = Timer()
     var mouseTimer = 0
     var mouseShouldBeHidden = false
@@ -55,7 +56,11 @@ class ViewController: NSViewController, NSWindowDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(changePopulation), name: .populationChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeColors), name: .colorsChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeResolution), name: .resolutionChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeViewColor), name: .backgroundColorChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeDepth), name: .depthChanged, object: nil)
+        self.view.layer?.backgroundColor = state.backgroundColor.toCGColor()
         startTimer()
+        soundtrack.playBackground()
     }
     
     override func viewWillDisappear() {
@@ -76,8 +81,24 @@ class ViewController: NSViewController, NSWindowDelegate {
         environment.flock.color()
     }
     
+    @objc func changeDepth() {
+        environment.flock.updateDepth()
+    }
+    
     @objc func changeResolution() {
         environment.changeResolution()
+        updateCanvasFrame()
+    }
+    
+    @objc func changeViewColor() {
+        self.view.layer?.backgroundColor = state.backgroundColor.toCGColor()
+    }
+    
+    func updateCanvasFrame() {
+        canvas.frame.origin.x = state.border
+        canvas.frame.origin.y = state.border
+        canvas.frame.size.width = (self.view.window?.contentView?.frame.width)! - state.border * 2
+        canvas.frame.size.height = (self.view.window?.contentView?.frame.height)! - state.border * 2
     }
     
     // MARK: - NSWindowDelegate
@@ -91,6 +112,10 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     override func mouseMoved(with event: NSEvent) {
         super.mouseMoved(with: event)
+    }
+    
+    func windowDidResize(_ notification: Notification) {
+        updateCanvasFrame()
     }
     
     // MARK: - Saving and opening
