@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:CuriousNature.xcodeproj">
+      location = "self:/Users/Sam/Developer/CuriousNature/Thirty Objects.xcodeproj">
    </FileRef>
 </Workspace>
