@@ -30,8 +30,8 @@ class Soundtrack {
         }
     }
     
-    func stop() {
-        player?.stop()
+    func pause() {
+        player?.pause()
     }
     
 }

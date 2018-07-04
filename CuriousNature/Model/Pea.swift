@@ -7,7 +7,7 @@
 //
 
 //
-// Pea is a particle objects containing vectors describing its location, velocity, and acceleration as well as its mass and visual qualities, methods for drawing and moving, etc.
+// Pea is a particle object containing vectors describing its location, velocity, and acceleration as well as its mass and visual qualities, methods for drawing and moving, etc.
 //
 
 import Cocoa

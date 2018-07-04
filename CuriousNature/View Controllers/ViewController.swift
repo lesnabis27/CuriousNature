@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ORSSerial
 
 class ViewController: NSViewController, NSWindowDelegate {
     
@@ -27,6 +28,9 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBAction func clearMenuItemSelected(_ sender: Any) {
         environment.clearCanvas(view: canvas)
     }
+    @IBAction func recolorMenuItemSelected(_ sender: Any) {
+        environment.flock.color()
+    }
     
     // MARK: - Properties
     lazy var environment = Environment()
@@ -34,6 +38,8 @@ class ViewController: NSViewController, NSWindowDelegate {
     var timer = Timer()
     var mouseTimer = 0
     var mouseShouldBeHidden = false
+    let serialPortManager = ORSSerialPortManager.shared()
+    let serialCommunicator = SerialCommunicator()
 
     // MARK: - View stuff
     override func viewWillAppear() {

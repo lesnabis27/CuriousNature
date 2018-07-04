@@ -15,4 +15,9 @@ class PrefsViewController: NSTabViewController {
         NSCursor.unhide()
     }
     
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        NSCursor.hide()
+    }
+    
 }

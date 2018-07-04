@@ -80,10 +80,8 @@ class Flock: Codable {
     
     // Recolor peas from state
     func color() {
-        if !state.colors.isEmpty {
-            for pea in peas {
-                pea.color = state.colors.randomItem()!.toCGColor()
-            }
+        for pea in peas {
+            pea.color = CGColor.random()
         }
     }
     

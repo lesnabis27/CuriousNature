@@ -18,11 +18,12 @@
 		221244F520792CF4006DDFB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 221244F420792CF4006DDFB1 /* Assets.xcassets */; };
 		221244F820792CF4006DDFB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221244F620792CF4006DDFB1 /* Main.storyboard */; };
 		2212450F20792DAE006DDFB1 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450E20792DAE006DDFB1 /* Vector.swift */; };
+		222AA05E20E97F46007AD91E /* SerialCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AA05D20E97F46007AD91E /* SerialCommunicator.swift */; };
 		228E4B95209F654300C5626E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B94209F654300C5626E /* Environment.swift */; };
 		228E4B9720A123B800C5626E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9620A123B800C5626E /* Profile.swift */; };
 		228E4B9920A2700900C5626E /* CGColorCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9820A2700900C5626E /* CGColorCodable.swift */; };
+		22B9DBCB20EC086500AA079C /* ORSSerial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DBC820EC084200AA079C /* ORSSerial.framework */; };
 		22D57E9220C439AE00FCE5E0 /* Soundtrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */; };
-		22D57E9420C4641400FCE5E0 /* NPS.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22D57E9320C4641300FCE5E0 /* NPS.m4a */; };
 		22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */; };
 		22EA74C920A87F09005B24C8 /* EnvironmentPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */; };
 		22EA74CB20A87F30005B24C8 /* FlockPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */; };
@@ -31,12 +32,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2212450020792CF4006DDFB1 /* PBXContainerItemProxy */ = {
+		22B9DBC720EC084200AA079C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 221244E520792CF3006DDFB1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 221244EC20792CF3006DDFB1;
-			remoteInfo = CuriousNature;
+			containerPortal = 22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9DCA89121A2BB106009285EB;
+			remoteInfo = ORSSerial;
+		};
+		22B9DBC920EC084200AA079C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9D7472131B6D7767002D8B10;
+			remoteInfo = "ORSSerialPort Tests";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -47,25 +55,27 @@
 		220C770D207ECB83005E2242 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		220C770F207FFC9A005E2242 /* ProcessKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessKit.swift; sourceTree = "<group>"; };
 		220C77112082598B005E2242 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		221244ED20792CF3006DDFB1 /* CuriousNature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CuriousNature.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		221244ED20792CF3006DDFB1 /* Thirty Objects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Thirty Objects.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		221244F020792CF3006DDFB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		221244F220792CF3006DDFB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		221244F420792CF4006DDFB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		221244F720792CF4006DDFB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		221244F920792CF4006DDFB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		221244FA20792CF4006DDFB1 /* CuriousNature.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CuriousNature.entitlements; sourceTree = "<group>"; };
-		221244FF20792CF4006DDFB1 /* CuriousNatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuriousNatureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2212450E20792DAE006DDFB1 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		222AA05C20E97EBB007AD91E /* Thirty Objects.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Thirty Objects.entitlements"; sourceTree = "<group>"; };
+		222AA05D20E97F46007AD91E /* SerialCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialCommunicator.swift; sourceTree = "<group>"; };
 		228E4B94209F654300C5626E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		228E4B9620A123B800C5626E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		228E4B9820A2700900C5626E /* CGColorCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGColorCodable.swift; sourceTree = "<group>"; };
+		22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ORSSerialPort.xcodeproj; path = "Frameworks/ORSSerialPort/Framework Project/ORSSerialPort.xcodeproj"; sourceTree = "<group>"; };
 		22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soundtrack.swift; sourceTree = "<group>"; };
-		22D57E9320C4641300FCE5E0 /* NPS.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = NPS.m4a; sourceTree = "<group>"; };
 		22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentPrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockPrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74CC20A87F4B005B24C8 /* InteractionsPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsPrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74D020A87F7E005B24C8 /* ProfilePrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePrefsViewController.swift; sourceTree = "<group>"; };
+		22EF22B020E2A65000C82A17 /* NPS.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = NPS.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,14 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B9DBCB20EC086500AA079C /* ORSSerial.framework in Frameworks */,
 				220C770E207ECB83005E2242 /* CoreGraphics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		221244FC20792CF4006DDFB1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +94,7 @@
 		220C770C207ECB83005E2242 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */,
 				220C770D207ECB83005E2242 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
@@ -98,6 +103,7 @@
 		221244E420792CF3006DDFB1 = {
 			isa = PBXGroup;
 			children = (
+				222AA05C20E97EBB007AD91E /* Thirty Objects.entitlements */,
 				221244EF20792CF3006DDFB1 /* CuriousNature */,
 				221244EE20792CF3006DDFB1 /* Products */,
 				220C770C207ECB83005E2242 /* Frameworks */,
@@ -107,8 +113,7 @@
 		221244EE20792CF3006DDFB1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				221244ED20792CF3006DDFB1 /* CuriousNature.app */,
-				221244FF20792CF4006DDFB1 /* CuriousNatureTests.xctest */,
+				221244ED20792CF3006DDFB1 /* Thirty Objects.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,13 +127,22 @@
 				22D2E23920900B5F00AFB916 /* View Controllers */,
 				22D2E23D2090127900AFB916 /* Views */,
 				22D2E23A20900B7E00AFB916 /* Model */,
-				221244F420792CF4006DDFB1 /* Assets.xcassets */,
 				22D57E9520C4999200FCE5E0 /* Sounds */,
+				221244F420792CF4006DDFB1 /* Assets.xcassets */,
 				221244F620792CF4006DDFB1 /* Main.storyboard */,
 				221244F920792CF4006DDFB1 /* Info.plist */,
 				221244FA20792CF4006DDFB1 /* CuriousNature.entitlements */,
 			);
 			path = CuriousNature;
+			sourceTree = "<group>";
+		};
+		22B9DBC320EC084200AA079C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22B9DBC820EC084200AA079C /* ORSSerial.framework */,
+				22B9DBCA20EC084200AA079C /* ORSSerialPort Tests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		22D2E23920900B5F00AFB916 /* View Controllers */ = {
@@ -147,6 +161,7 @@
 		22D2E23A20900B7E00AFB916 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				222AA05D20E97F46007AD91E /* SerialCommunicator.swift */,
 				22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */,
 				228E4B9620A123B800C5626E /* Profile.swift */,
 				228E4B94209F654300C5626E /* Environment.swift */,
@@ -169,7 +184,7 @@
 		22D57E9520C4999200FCE5E0 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				22D57E9320C4641300FCE5E0 /* NPS.m4a */,
+				22EF22B020E2A65000C82A17 /* NPS.m4a */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -177,9 +192,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		221244EC20792CF3006DDFB1 /* CuriousNature */ = {
+		221244EC20792CF3006DDFB1 /* Thirty Objects */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2212450820792CF4006DDFB1 /* Build configuration list for PBXNativeTarget "CuriousNature" */;
+			buildConfigurationList = 2212450820792CF4006DDFB1 /* Build configuration list for PBXNativeTarget "Thirty Objects" */;
 			buildPhases = (
 				221244E920792CF3006DDFB1 /* Sources */,
 				221244EA20792CF3006DDFB1 /* Frameworks */,
@@ -190,28 +205,10 @@
 			);
 			dependencies = (
 			);
-			name = CuriousNature;
+			name = "Thirty Objects";
 			productName = CuriousNature;
-			productReference = 221244ED20792CF3006DDFB1 /* CuriousNature.app */;
+			productReference = 221244ED20792CF3006DDFB1 /* Thirty Objects.app */;
 			productType = "com.apple.product-type.application";
-		};
-		221244FE20792CF4006DDFB1 /* CuriousNatureTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2212450B20792CF4006DDFB1 /* Build configuration list for PBXNativeTarget "CuriousNatureTests" */;
-			buildPhases = (
-				221244FB20792CF4006DDFB1 /* Sources */,
-				221244FC20792CF4006DDFB1 /* Frameworks */,
-				221244FD20792CF4006DDFB1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2212450120792CF4006DDFB1 /* PBXTargetDependency */,
-			);
-			name = CuriousNatureTests;
-			productName = CuriousNatureTests;
-			productReference = 221244FF20792CF4006DDFB1 /* CuriousNatureTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -231,10 +228,6 @@
 							};
 						};
 					};
-					221244FE20792CF4006DDFB1 = {
-						CreatedOnToolsVersion = 9.3;
-						TestTargetID = 221244EC20792CF3006DDFB1;
-					};
 				};
 			};
 			buildConfigurationList = 221244E820792CF3006DDFB1 /* Build configuration list for PBXProject "Thirty Objects" */;
@@ -248,29 +241,43 @@
 			mainGroup = 221244E420792CF3006DDFB1;
 			productRefGroup = 221244EE20792CF3006DDFB1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 22B9DBC320EC084200AA079C /* Products */;
+					ProjectRef = 22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
-				221244EC20792CF3006DDFB1 /* CuriousNature */,
-				221244FE20792CF4006DDFB1 /* CuriousNatureTests */,
+				221244EC20792CF3006DDFB1 /* Thirty Objects */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		22B9DBC820EC084200AA079C /* ORSSerial.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ORSSerial.framework;
+			remoteRef = 22B9DBC720EC084200AA079C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22B9DBCA20EC084200AA079C /* ORSSerialPort Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ORSSerialPort Tests.xctest";
+			remoteRef = 22B9DBC920EC084200AA079C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		221244EB20792CF3006DDFB1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22D57E9420C4641400FCE5E0 /* NPS.m4a in Resources */,
 				221244F520792CF4006DDFB1 /* Assets.xcassets in Resources */,
 				221244F820792CF4006DDFB1 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		221244FD20792CF4006DDFB1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +317,7 @@
 				221244F120792CF3006DDFB1 /* AppDelegate.swift in Sources */,
 				22EA74C920A87F09005B24C8 /* EnvironmentPrefsViewController.swift in Sources */,
 				22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */,
+				222AA05E20E97F46007AD91E /* SerialCommunicator.swift in Sources */,
 				228E4B9720A123B800C5626E /* Profile.swift in Sources */,
 				220C770720793794005E2242 /* Canvas.swift in Sources */,
 				228E4B9920A2700900C5626E /* CGColorCodable.swift in Sources */,
@@ -317,22 +325,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		221244FB20792CF4006DDFB1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2212450120792CF4006DDFB1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 221244EC20792CF3006DDFB1 /* CuriousNature */;
-			targetProxy = 2212450020792CF4006DDFB1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		221244F620792CF4006DDFB1 /* Main.storyboard */ = {
@@ -463,11 +456,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = CuriousNature/CuriousNature.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Thirty Objects.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = FG88Y76FBG;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = CuriousNature/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -483,11 +477,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = CuriousNature/CuriousNature.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Thirty Objects.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = FG88Y76FBG;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = CuriousNature/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,48 +491,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.smrchrdsn.CuriousNature;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		2212450C20792CF4006DDFB1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FG88Y76FBG;
-				INFOPLIST_FILE = CuriousNatureTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smrchrdsn.CuriousNatureTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CuriousNature.app/Contents/MacOS/CuriousNature";
-			};
-			name = Debug;
-		};
-		2212450D20792CF4006DDFB1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FG88Y76FBG;
-				INFOPLIST_FILE = CuriousNatureTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.smrchrdsn.CuriousNatureTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CuriousNature.app/Contents/MacOS/CuriousNature";
 			};
 			name = Release;
 		};
@@ -553,20 +506,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2212450820792CF4006DDFB1 /* Build configuration list for PBXNativeTarget "CuriousNature" */ = {
+		2212450820792CF4006DDFB1 /* Build configuration list for PBXNativeTarget "Thirty Objects" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2212450920792CF4006DDFB1 /* Debug */,
 				2212450A20792CF4006DDFB1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2212450B20792CF4006DDFB1 /* Build configuration list for PBXNativeTarget "CuriousNatureTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2212450C20792CF4006DDFB1 /* Debug */,
-				2212450D20792CF4006DDFB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
