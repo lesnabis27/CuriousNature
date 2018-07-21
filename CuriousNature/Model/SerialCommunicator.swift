@@ -10,9 +10,38 @@ import Cocoa
 import ORSSerial
 
 class SerialCommunicator: NSObject, ORSSerialPortDelegate {
+
+    static let kTimeoutDuration = 0.5
     
-    deinit {
-        self.serialPort = nil
+    enum SerialBoardRequestType: Int {
+        case readDistance = 1
+    }
+    
+    // MARK: - Private Methods
+    
+    func pollingTimerFired() {
+        self.readDistance()
+    }
+    
+    // MARK: Sending Commands
+    
+    fileprivate func readDistance() {
+        let command = "$DIST?;".data(using: String.Encoding.ascii)!
+        let responseDescriptor = ORSSerialPacketDescriptor(prefixString: "!DIST", suffixString: ";", maximumPacketLength: 10, userInfo: nil)
+        let request = ORSSerialRequest(dataToSend: command, userInfo: SerialBoardRequestType.readDistance.rawValue, timeoutInterval: 0.5, responseDescriptor: responseDescriptor)
+        self.serialPort?.send(request)
+    }
+    
+    // MARK: - Parsing Responses
+    
+    fileprivate func distanceFromResponsePacket(_ data: Data) -> Int? {
+        let dataAsString = NSString(data: data, encoding: String.Encoding.ascii.rawValue)!
+        if dataAsString.length < 6 || !dataAsString.hasPrefix("!DIST") || !dataAsString.hasSuffix(";") {
+            return nil
+        }
+        let distanceString = dataAsString.substring(with: NSRange(location: 5, length: dataAsString.length - 6))
+        print(distanceString)
+        return Int(distanceString)
     }
     
     // MARK: - ORSSerialPortDelegate
@@ -25,21 +54,26 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
         print("Serial port \(serialPort) encountered an error: \(error)")
     }
     
-    func serialPortWasOpened(_ serialPort: ORSSerialPort) {
-        let descriptor = ORSSerialPacketDescriptor(prefixString: "!pos", suffixString: ";", maximumPacketLength: 8, userInfo: nil)
-        serialPort.startListeningForPackets(matching: descriptor)
+    func serialPort(_ serialPort: ORSSerialPort, didReceiveResponse responseData: Data, to request: ORSSerialRequest) {
+        let requestType = SerialBoardRequestType(rawValue: request.userInfo as! Int)!
+        if requestType == .readDistance {
+            self.distance = self.distanceFromResponsePacket(responseData)!
+        }
     }
     
-    func serialPort(_ serialPort: ORSSerialPort, didReceivePacket packetData: Data, matching descriptor: ORSSerialPacketDescriptor) {
-        if let dataAsString = NSString(data: packetData, encoding: String.Encoding.ascii.rawValue) {
-            let valueString = dataAsString.substring(with: NSRange(location: 4, length: dataAsString.length-5))
-            print(valueString)
-        }
+    func serialPortWasOpened(_ serialPort: ORSSerialPort) {
+        print("Serial port was opened")
+        return
+    }
+    
+    func serialPortWasClosed(_ serialPort: ORSSerialPort) {
+        return
     }
     
     // MARK: - Properties
     
-    @objc dynamic var serialPort: ORSSerialPort? {
+//    fileprivate(set) internal var serialPort: ORSSerialPort? {
+    var serialPort: ORSSerialPort? {
         willSet {
             if let port = serialPort {
                 port.close()
@@ -48,12 +82,16 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
         }
         didSet {
             if let port = serialPort {
-                port.baudRate = 9600
-                port.rts = true
+                // /dev/cu.usbmodem1411
+                port.baudRate = 57600
                 port.delegate = self
+                port.rts = true
                 port.open()
+                print("Serial port was set")
             }
         }
     }
+    
+    @objc dynamic fileprivate(set) internal var distance: Int = 0
     
 }
