@@ -7,11 +7,36 @@
 //
 
 import Cocoa
+import ORSSerial
 
 class ProfilePrefsViewController: NSViewController {
 
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var serialPortsPopUp: NSPopUpButton!
+    @IBOutlet weak var autosaveFramesCheckbox: NSButton!
+    @IBOutlet weak var autosaveFramesPathControl: NSPathControl!
+    
+    // MARK: - IBActions
+    @IBAction func serialPortPopUpChanged(_ sender: NSPopUpButton) {
+        serialCommunicator.serialPort = ORSSerialPort(path: "/dev/cu.\(sender.titleOfSelectedItem!)")
+    }
+    @IBAction func autosaveFramesCheckboxChanged(_ sender: NSButton) {
+    }
+    @IBAction func autosaveFramesPathControlChanged(_ sender: NSPathControl) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        for port in serialPortManager.availablePorts {
+            serialPortsPopUp.addItem(withTitle: port.name)
+        }
+        if let currentPort = serialCommunicator.serialPort {
+            if serialPortsPopUp.itemTitles.contains(currentPort.name) {
+                serialPortsPopUp.selectItem(withTitle: currentPort.name)
+            }
+        }
+        
     }
     
 }

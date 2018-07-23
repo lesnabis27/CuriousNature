@@ -9,6 +9,10 @@
 import Cocoa
 import ORSSerial
 
+// Global Serial Communicator
+let serialPortManager = ORSSerialPortManager.shared()
+let serialCommunicator = SerialCommunicator()
+
 class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - IBOutlets
@@ -38,8 +42,6 @@ class ViewController: NSViewController, NSWindowDelegate {
     var timer = Timer()
     var mouseTimer = 0
     var mouseShouldBeHidden = false
-    let serialPortManager = ORSSerialPortManager.shared()
-    let serialCommunicator = SerialCommunicator()
 
     // MARK: - View stuff
     override func viewWillAppear() {
