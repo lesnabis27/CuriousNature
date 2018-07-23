@@ -24,7 +24,7 @@ class EnvironmentPrefsViewController: NSViewController {
     
     // MARK: - IBActions
     @IBAction func backgroundColorWellChanged(_ sender: NSColorWell) {
-        state.backgroundColor = CGColorCodable(color: sender.color.cgColor)
+        state.backgroundColor = sender.color.cgColor
         NotificationCenter.default.post(name: .backgroundColorChanged, object: nil)
     }
     @IBAction func fadeCheckboxChanged(_ sender: NSButton) {
@@ -96,7 +96,7 @@ class EnvironmentPrefsViewController: NSViewController {
         super.viewDidLoad()
         
         // Update controls to correct states
-        backgroundColorWell.color = state.backgroundColor.toNSColor()
+        backgroundColorWell.color = NSColor(cgColor: state.backgroundColor)!
         fadeAlphaTextField.stringValue = "\(state.fadeAlpha)"
         fadeAlphaSlider.floatValue = Float(state.fadeAlpha)
         fadeFrequencyTextField.stringValue = "\(state.fadeFrequency)"

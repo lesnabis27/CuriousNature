@@ -8,17 +8,21 @@
 
 import Cocoa
 
-class FlockPrefsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class FlockPrefsViewController: NSViewController {
 
     // MARK: - IBOutlets
     
-    @IBOutlet weak var colorTableView: NSTableView!
     @IBOutlet weak var populationField: NSTextField!
     @IBOutlet weak var minDepthField: NSTextField!
     @IBOutlet weak var maxDepthField: NSTextField!
     @IBOutlet weak var vineAlphaField: NSTextField!
     @IBOutlet weak var leafAlphaField: NSTextField!
-    @IBOutlet weak var newColorWell: NSColorWell!
+    @IBOutlet weak var saturationRangeLabel: NSTextField!
+    @IBOutlet weak var maxSaturationSlider: NSSlider!
+    @IBOutlet weak var minSaturationSlider: NSSlider!
+    @IBOutlet weak var brightnessRangeLabel: NSTextField!
+    @IBOutlet weak var maxBrightnessSlider: NSSlider!
+    @IBOutlet weak var minBrightnessSlider: NSSlider!
     
     // MARK: - IBActions
     
@@ -35,22 +39,45 @@ class FlockPrefsViewController: NSViewController, NSTableViewDelegate, NSTableVi
         NotificationCenter.default.post(name: .depthChanged, object: nil)
     }
     @IBAction func vineAlphaFieldChanged(_ sender: NSTextField) {
+        state.vineAlpha = CGFloat(sender.floatValue)
+        NotificationCenter.default.post(name: .vineAlphaChanged, object: nil)
     }
     @IBAction func leafAlphaFieldChanged(_ sender: NSTextField) {
+        state.leafAlpha = CGFloat(sender.floatValue)
+        NotificationCenter.default.post(name: .leafAlphaChanged, object: nil)
     }
-    @IBAction func addColor(_ sender: NSButton) {
-        colorTableView.reloadData()
+    @IBAction func maxSaturationSliderChanged(_ sender: NSSlider) {
+        state.maxSaturation = CGFloat(sender.floatValue).truncate(places: 2)
+        if state.minSaturation > state.maxSaturation {
+            state.minSaturation = state.maxSaturation
+            minSaturationSlider.floatValue = Float(state.minSaturation)
+        }
+        saturationRangeLabel.stringValue = "\(state.minSaturation)-\(state.maxSaturation)"
     }
-    @IBAction func removeColor(_ sender: NSButton) {
-        colorTableView.reloadData()
+    @IBAction func minSaturationSliderChanged(_ sender: NSSlider) {
+        state.minSaturation = CGFloat(sender.floatValue).truncate(places: 2)
+        if state.maxSaturation < state.minSaturation {
+            state.maxSaturation = state.minSaturation
+            maxSaturationSlider.floatValue = Float(state.maxSaturation)
+        }
+        saturationRangeLabel.stringValue = "\(state.minSaturation)-\(state.maxSaturation)"
     }
-    @IBAction func randomizeColors(_ sender: NSButton) {
-        colorTableView.reloadData()
+    @IBAction func maxBrightnessSliderChanged(_ sender: NSSlider) {
+        state.maxBrightness = CGFloat(sender.floatValue).truncate(places: 2)
+        if state.minBrightness > state.maxBrightness {
+            state.minBrightness = state.maxBrightness
+            minBrightnessSlider.floatValue = Float(state.minBrightness)
+        }
+        brightnessRangeLabel.stringValue = "\(state.minBrightness)-\(state.maxBrightness)"
     }
-    
-    // MARK: - Properties
-    
-    var colors: [CGColor?] = []
+    @IBAction func minBrightnessSliderChanged(_ sender: NSSlider) {
+        state.minBrightness = CGFloat(sender.floatValue).truncate(places: 2)
+        if state.maxBrightness < state.minBrightness {
+            state.maxBrightness = state.minBrightness
+            maxBrightnessSlider.floatValue = Float(state.minBrightness)
+        }
+        brightnessRangeLabel.stringValue = "\(state.minBrightness)-\(state.maxBrightness)"
+    }
     
     // MARK: - Lifecycle Methods
     
@@ -59,12 +86,14 @@ class FlockPrefsViewController: NSViewController, NSTableViewDelegate, NSTableVi
         populationField.stringValue = "\(state.population)"
         minDepthField.stringValue = "\(state.minDepth)"
         maxDepthField.stringValue = "\(state.maxDepth)"
-    }
-    
-    // MARK: - Table View
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return colors.count
+        vineAlphaField.stringValue = "\(state.vineAlpha)"
+        leafAlphaField.stringValue = "\(state.leafAlpha)"
+        saturationRangeLabel.stringValue = "\(state.minSaturation)-\(state.maxSaturation)"
+        brightnessRangeLabel.stringValue = "\(state.minBrightness)-\(state.maxBrightness)"
+        maxSaturationSlider.floatValue = Float(state.maxSaturation)
+        minSaturationSlider.floatValue = Float(state.minSaturation)
+        maxBrightnessSlider.floatValue = Float(state.maxBrightness)
+        minBrightnessSlider.floatValue = Float(state.minBrightness)
     }
     
 }

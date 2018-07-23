@@ -29,7 +29,7 @@ class Pea: Codable {
         vel = Vector.random2D()
         acc = [0, 0]
         depth = CGFloat.random(from: state.minDepth, to: state.maxDepth)
-        color = state.colors.randomItem()!.toCGColor()
+        color = CGColor.random()
         currentInteractions = 0
     }
     
@@ -55,8 +55,7 @@ class Pea: Codable {
         vel = try values.decode(Vector.self, forKey: .vel)
         acc = try values.decode(Vector.self, forKey: .acc)
         depth = try values.decode(CGFloat.self, forKey: .depth)
-        let codableColor = try values.decode(CGColorCodable.self, forKey: .color)
-        color = codableColor.toCGColor()
+        color = CGColor.random() // FIX
         currentInteractions = 0
     }
     
@@ -68,7 +67,6 @@ class Pea: Codable {
         try container.encode(vel, forKey: .vel)
         try container.encode(acc, forKey: .acc)
         try container.encode(depth, forKey: .depth)
-        try container.encode(CGColorCodable(color: color), forKey: .color)
     }
     
     // MARK: - Motion
@@ -225,14 +223,16 @@ class Pea: Codable {
     func drawPath(to context: CGContext) {
         context.setStrokeColor(color)
         context.setLineWidth(depth)
+        context.setAlpha(state.vineAlpha)
         PK.line(from: ploc.toCGPoint(), to: loc.toCGPoint(), in: context)
     }
     
     func drawInteractionsWithLines(to context: CGContext, peas: [Pea]) {
         for pea in peas {
             let distance = loc.simpleDistanceTo(pea.loc)
-            context.setLineCap(.round)
             if distance < (state.activeRange * state.activeRange) && distance > 0 {
+                context.setLineCap(.round)
+                context.setAlpha(state.vineAlpha)
                 context.setStrokeColor(color)
                 context.setLineWidth(depth * 5)
                 PK.line(from: loc.toCGPoint(), to: pea.loc.toCGPoint(), in: context)
@@ -244,6 +244,7 @@ class Pea: Codable {
         for pea in peas {
             let distance = loc.simpleDistanceTo(pea.loc)
             if distance < (state.activeRangeSquared) && distance > 0 {
+                context.setAlpha(state.leafAlpha)
                 context.setFillColor(color)
                 PK.polygon(from: [loc.toCGPoint(), pea.loc.toCGPoint(), pea.ploc.toCGPoint(), ploc.toCGPoint()], in: context)
             }

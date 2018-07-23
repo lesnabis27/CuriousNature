@@ -34,7 +34,6 @@ class Environment: Codable {
         
         // Flock setup
         flock = Flock()
-        flock.alpha = 0.2
         
         // Visual setup
         PK.background(in: context!)

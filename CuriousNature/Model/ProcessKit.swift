@@ -23,7 +23,7 @@ struct PK {
     }
     
     public static func background(in context: CGContext) {
-        context.setFillColor(state.backgroundColor.toCGColor())
+        context.setFillColor(state.backgroundColor)
         context.fill(CGRect.init(x: 0, y: 0, width: state.xResolution, height: state.yResolution))
     }
     
@@ -33,7 +33,7 @@ struct PK {
     }
     
     public static func fadeBackground(in context: CGContext) {
-        context.setFillColor(state.backgroundColor.toCGColor())
+        context.setFillColor(state.backgroundColor)
         context.setAlpha(state.fadeAlpha)
         context.fill(CGRect.init(x: 0, y: 0, width: state.xResolution, height: state.yResolution))
     }

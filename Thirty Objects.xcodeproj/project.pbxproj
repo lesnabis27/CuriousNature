@@ -21,7 +21,6 @@
 		222AA05E20E97F46007AD91E /* SerialCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AA05D20E97F46007AD91E /* SerialCommunicator.swift */; };
 		228E4B95209F654300C5626E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B94209F654300C5626E /* Environment.swift */; };
 		228E4B9720A123B800C5626E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9620A123B800C5626E /* Profile.swift */; };
-		228E4B9920A2700900C5626E /* CGColorCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9820A2700900C5626E /* CGColorCodable.swift */; };
 		22B9DBCB20EC086500AA079C /* ORSSerial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DBC820EC084200AA079C /* ORSSerial.framework */; };
 		22D57E9220C439AE00FCE5E0 /* Soundtrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */; };
 		22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */; };
@@ -67,7 +66,6 @@
 		222AA05D20E97F46007AD91E /* SerialCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialCommunicator.swift; sourceTree = "<group>"; };
 		228E4B94209F654300C5626E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		228E4B9620A123B800C5626E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		228E4B9820A2700900C5626E /* CGColorCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGColorCodable.swift; sourceTree = "<group>"; };
 		22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ORSSerialPort.xcodeproj; path = "Frameworks/ORSSerialPort/Framework Project/ORSSerialPort.xcodeproj"; sourceTree = "<group>"; };
 		22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soundtrack.swift; sourceTree = "<group>"; };
 		22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			children = (
 				221244F020792CF3006DDFB1 /* AppDelegate.swift */,
 				220C77112082598B005E2242 /* Extensions.swift */,
-				228E4B9820A2700900C5626E /* CGColorCodable.swift */,
 				22D2E23920900B5F00AFB916 /* View Controllers */,
 				22D2E23D2090127900AFB916 /* Views */,
 				22D2E23A20900B7E00AFB916 /* Model */,
@@ -320,7 +317,6 @@
 				222AA05E20E97F46007AD91E /* SerialCommunicator.swift in Sources */,
 				228E4B9720A123B800C5626E /* Profile.swift in Sources */,
 				220C770720793794005E2242 /* Canvas.swift in Sources */,
-				228E4B9920A2700900C5626E /* CGColorCodable.swift in Sources */,
 				220C770B20793EDA005E2242 /* Flock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

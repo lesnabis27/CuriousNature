@@ -16,13 +16,11 @@ class Flock: Codable {
     
     // MARK: - Properties
     var peas: [Pea]
-    var alpha: CGFloat
     var currentInteractions: Int
     
     // MARK: - Initializers
     init() {
         peas = [Pea]()
-        alpha = 1.0
         currentInteractions = 0
         populate()
     }
@@ -90,7 +88,6 @@ class Flock: Codable {
     // Update peas based on interactions
     func updateFlock(to context: CGContext) {
         currentInteractions = 0
-        context.setAlpha(alpha)
         for pea in peas {
             pea.update(seeking: peas)
             currentInteractions += pea.currentInteractions

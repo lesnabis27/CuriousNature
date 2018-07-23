@@ -30,6 +30,8 @@ extension Notification.Name {
     static let resolutionChanged = Notification.Name("resolutionChanged")
     static let backgroundColorChanged = Notification.Name("backgroundColorChanged")
     static let depthChanged = Notification.Name("depthChanged")
+    static let vineAlphaChanged = Notification.Name("vineAlphaChanged")
+    static let leafAlphaChanged = Notification.Name("leafAlphaChanged")
 }
 
 extension Array {
@@ -55,6 +57,9 @@ extension CGFloat {
     }
     static func random(from start: CGFloat, to end: CGFloat) -> CGFloat {
         return CGFloat(arc4random_uniform(UInt32(end-start))) + start
+    }
+    func truncate(places : Int) -> CGFloat {
+        return CGFloat(floor(pow(10.0, CGFloat(places)) * self)/pow(10.0, CGFloat(places)))
     }
 }
 

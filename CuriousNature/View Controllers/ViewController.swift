@@ -66,7 +66,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(changeResolution), name: .resolutionChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeViewColor), name: .backgroundColorChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeDepth), name: .depthChanged, object: nil)
-        self.view.layer?.backgroundColor = state.backgroundColor.toCGColor()
+        self.view.layer?.backgroundColor = state.backgroundColor
         startTimer()
         soundtrack.playBackground()
     }
@@ -99,7 +99,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     @objc func changeViewColor() {
-        self.view.layer?.backgroundColor = state.backgroundColor.toCGColor()
+        self.view.layer?.backgroundColor = state.backgroundColor
     }
     
     func updateCanvasFrame() {
