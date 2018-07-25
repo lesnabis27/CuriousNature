@@ -43,6 +43,11 @@ class Profile: Codable {
     var activeRange: CGFloat
     var activeRangeSquared: CGFloat
     
+    // MARK: - Profile Properties
+    var shouldAutosave: Bool
+    var autosavePath: URL
+    var serialPort: String
+    
     // MARK: - Keys
     enum CodingKeys: String, CodingKey {
         case shouldFade
@@ -66,6 +71,9 @@ class Profile: Codable {
         case alignmentWeight
         case cohesionWeight
         case activeRange
+        case shouldAutosave
+        case autosavePath
+        case serialPort
     }
     
     // MARK: - Initializer
@@ -94,9 +102,12 @@ class Profile: Codable {
         cohesionWeight = 1.5
         activeRange = 50.0
         activeRangeSquared = activeRange * activeRange
+        shouldAutosave = false
+        autosavePath = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask)[0]
+        serialPort = "/dev/cu.usbmodem1411"
     }
     
-    init(shouldFade: Bool, fadeAlpha: CGFloat, fadeFrequency: Int, xResolution: CGFloat, yResolution: CGFloat, border: CGFloat, population: Int, minDepth: CGFloat, maxDepth: CGFloat, vineAlpha: CGFloat, leafAlpha: CGFloat, maxSaturation: CGFloat, minSaturation: CGFloat, maxBrightness: CGFloat, minBrightness: CGFloat, maximumSpeed: CGFloat, maximumForce: CGFloat, separationWeight: CGFloat, alignmentWeight: CGFloat, cohesionWeight: CGFloat, activeRange: CGFloat) {
+    init(shouldFade: Bool, fadeAlpha: CGFloat, fadeFrequency: Int, xResolution: CGFloat, yResolution: CGFloat, border: CGFloat, population: Int, minDepth: CGFloat, maxDepth: CGFloat, vineAlpha: CGFloat, leafAlpha: CGFloat, maxSaturation: CGFloat, minSaturation: CGFloat, maxBrightness: CGFloat, minBrightness: CGFloat, maximumSpeed: CGFloat, maximumForce: CGFloat, separationWeight: CGFloat, alignmentWeight: CGFloat, cohesionWeight: CGFloat, activeRange: CGFloat, shouldAutosave: Bool, autosavePath: URL, serialPort: String) {
         self.shouldFade = shouldFade
         self.fadeAlpha = fadeAlpha
         self.fadeFrequency = fadeFrequency
@@ -118,6 +129,9 @@ class Profile: Codable {
         self.alignmentWeight = alignmentWeight
         self.cohesionWeight = cohesionWeight
         self.activeRange = activeRange
+        self.shouldAutosave = shouldAutosave
+        self.autosavePath = autosavePath
+        self.serialPort = serialPort
         backgroundColor = CGColor(gray: 0.0, alpha: 1.0)
         activeRangeSquared = activeRange * activeRange
     }
@@ -145,6 +159,9 @@ class Profile: Codable {
         alignmentWeight = try values.decode(CGFloat.self, forKey: .alignmentWeight)
         cohesionWeight = try values.decode(CGFloat.self, forKey: .cohesionWeight)
         activeRange = try values.decode(CGFloat.self, forKey: .activeRange)
+        shouldAutosave = try values.decode(Bool.self, forKey: .shouldAutosave)
+        autosavePath = try values.decode(URL.self, forKey: .autosavePath)
+        serialPort = try values.decode(String.self, forKey: .serialPort)
         activeRangeSquared = activeRange * activeRange
         backgroundColor = CGColor(gray: 0.0, alpha: 1.0)
     }

@@ -21,6 +21,8 @@
 		222AA05E20E97F46007AD91E /* SerialCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AA05D20E97F46007AD91E /* SerialCommunicator.swift */; };
 		228E4B95209F654300C5626E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B94209F654300C5626E /* Environment.swift */; };
 		228E4B9720A123B800C5626E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9620A123B800C5626E /* Profile.swift */; };
+		229C53F92108003200D8F48E /* Crickets.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 229C53F72108003100D8F48E /* Crickets.mp3 */; };
+		229C53FA2108003200D8F48E /* Background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 229C53F82108003200D8F48E /* Background.mp3 */; };
 		22B9DBCB20EC086500AA079C /* ORSSerial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DBC820EC084200AA079C /* ORSSerial.framework */; };
 		22D57E9220C439AE00FCE5E0 /* Soundtrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */; };
 		22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */; };
@@ -66,6 +68,8 @@
 		222AA05D20E97F46007AD91E /* SerialCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialCommunicator.swift; sourceTree = "<group>"; };
 		228E4B94209F654300C5626E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		228E4B9620A123B800C5626E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		229C53F72108003100D8F48E /* Crickets.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Crickets.mp3; sourceTree = "<group>"; };
+		229C53F82108003200D8F48E /* Background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Background.mp3; sourceTree = "<group>"; };
 		22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ORSSerialPort.xcodeproj; path = "Frameworks/ORSSerialPort/Framework Project/ORSSerialPort.xcodeproj"; sourceTree = "<group>"; };
 		22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soundtrack.swift; sourceTree = "<group>"; };
 		22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
@@ -73,7 +77,6 @@
 		22EA74CA20A87F30005B24C8 /* FlockPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockPrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74CC20A87F4B005B24C8 /* InteractionsPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsPrefsViewController.swift; sourceTree = "<group>"; };
 		22EA74D020A87F7E005B24C8 /* ProfilePrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePrefsViewController.swift; sourceTree = "<group>"; };
-		22EF22B020E2A65000C82A17 /* NPS.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = NPS.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +184,8 @@
 		22D57E9520C4999200FCE5E0 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				22EF22B020E2A65000C82A17 /* NPS.m4a */,
+				229C53F82108003200D8F48E /* Background.mp3 */,
+				229C53F72108003100D8F48E /* Crickets.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -273,8 +277,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				229C53FA2108003200D8F48E /* Background.mp3 in Resources */,
 				221244F520792CF4006DDFB1 /* Assets.xcassets in Resources */,
 				221244F820792CF4006DDFB1 /* Main.storyboard in Resources */,
+				229C53F92108003200D8F48E /* Crickets.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

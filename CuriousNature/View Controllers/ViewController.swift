@@ -61,7 +61,6 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(serialPortManager.availablePorts)
         serialCommunicator.serialPort = ORSSerialPort(path: "/dev/cu.usbmodem1411")
         NotificationCenter.default.addObserver(self, selector: #selector(changePopulation), name: .populationChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(changeColors), name: .colorsChanged, object: nil)
@@ -159,6 +158,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         print(serialCommunicator.sensorData)
         environment.update()
         canvas.update(from: environment.context)
+        soundtrack.checkForNight()
     }
     
 }
