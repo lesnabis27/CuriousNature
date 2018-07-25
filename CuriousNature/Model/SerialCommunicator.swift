@@ -34,14 +34,15 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
     
     // MARK: - Parsing Responses
     
-    fileprivate func distanceFromResponsePacket(_ data: Data) -> Int? {
+    fileprivate func distanceFromResponsePacket(_ data: Data) {
         let dataAsString = NSString(data: data, encoding: String.Encoding.ascii.rawValue)!
         if dataAsString.length < 6 || !dataAsString.hasPrefix("!DIST") || !dataAsString.hasSuffix(";") {
-            return nil
+            print("Invalid serial data")
+            return
         }
-        let distanceString = dataAsString.substring(with: NSRange(location: 5, length: dataAsString.length - 6))
-        print(distanceString)
-        return Int(distanceString)
+        let idString = dataAsString.substring(with: NSRange(location: 5, length: 1))
+        let distanceString = dataAsString.substring(with: NSRange(location: 6, length: dataAsString.length - 7))
+        sensorData[Int(idString)!] = Int(distanceString)!
     }
     
     // MARK: - ORSSerialPortDelegate
@@ -57,7 +58,7 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
     func serialPort(_ serialPort: ORSSerialPort, didReceiveResponse responseData: Data, to request: ORSSerialRequest) {
         let requestType = SerialBoardRequestType(rawValue: request.userInfo as! Int)!
         if requestType == .readDistance {
-            self.distance = self.distanceFromResponsePacket(responseData)!
+            self.distanceFromResponsePacket(responseData)
         }
     }
     
@@ -72,7 +73,8 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
     
     // MARK: - Properties
     
-//    fileprivate(set) internal var serialPort: ORSSerialPort? {
+    var sensorData: [Int] = [0, 0, 0, 0, 0]
+    
     var serialPort: ORSSerialPort? {
         willSet {
             if let port = serialPort {
@@ -91,7 +93,5 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
             }
         }
     }
-    
-    @objc dynamic fileprivate(set) internal var distance: Int = 0
     
 }

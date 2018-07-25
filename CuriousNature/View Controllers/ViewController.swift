@@ -156,6 +156,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     @objc func update(_: Timer) {
         serialCommunicator.pollingTimerFired()
+        print(serialCommunicator.sensorData)
         environment.update()
         canvas.update(from: environment.context)
     }
