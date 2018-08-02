@@ -1212,17 +1212,18 @@
                                                 <action selector="autosaveFramesCheckboxChanged:" target="8vz-QF-z0x" id="X3T-Dd-HgD"/>
                                             </connections>
                                         </button>
-                                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0Q-UQ-Y2O">
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Buy-WQ-JxR">
                                             <rect key="frame" x="20" y="33" width="372" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="Ezu-ld-aWt">
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Path" drawsBackground="YES" id="HHm-iz-rQl">
                                                 <font key="font" metaFont="system"/>
-                                                <url key="url" string="file:///Users/"/>
-                                            </pathCell>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
                                             <connections>
-                                                <action selector="autosaveFramesPathControlChanged:" target="8vz-QF-z0x" id="gaf-Rs-UdD"/>
+                                                <action selector="autosavePathTextFieldChanged:" target="8vz-QF-z0x" id="BMT-0u-scC"/>
                                             </connections>
-                                        </pathControl>
+                                        </textField>
                                     </subviews>
                                 </view>
                             </box>
@@ -1230,7 +1231,7 @@
                     </view>
                     <connections>
                         <outlet property="autosaveFramesCheckbox" destination="hAb-iO-VNA" id="pr1-3t-97J"/>
-                        <outlet property="autosaveFramesPathControl" destination="k0Q-UQ-Y2O" id="wWe-fx-IPk"/>
+                        <outlet property="autosavePathTextField" destination="Buy-WQ-JxR" id="Tw7-Nk-DFG"/>
                         <outlet property="serialPortsPopUp" destination="LBJ-dU-iBm" id="Q6J-zx-fTF"/>
                     </connections>
                 </viewController>

@@ -12,11 +12,19 @@
 
 import Foundation
 
-class Flock: Codable {
+class Flock {
     
     // MARK: - Properties
     var peas: [Pea]
     var currentInteractions: Int
+    var colors: [CGColor] = [
+        CGColor(red: 0.83, green: 0.3, blue: 0.31, alpha: 1.0),
+        CGColor(red: 0.83, green: 0.3, blue: 0.31, alpha: 1.0),
+        CGColor(red: 0.06, green: 0.53, blue: 0.52, alpha: 1.0),
+        CGColor(red: 0.06, green: 0.53, blue: 0.52, alpha: 1.0),
+        CGColor(red: 0.25, green: 0.54, blue: 0.0, alpha: 1.0),
+        CGColor(red: 0.52, green: 0.53, blue: 0.03, alpha: 1.0)
+    ]
     
     // MARK: - Initializers
     init() {
@@ -28,7 +36,7 @@ class Flock: Codable {
     // MARK: - Methods
     func populate() {
         for _ in 0..<state.population {
-            peas.append(Pea())
+            peas.append(Pea(color: colors.randomItem()!))
         }
     }
     
@@ -45,7 +53,7 @@ class Flock: Codable {
     
     func addPeas(count: Int) {
         for _ in 0..<count {
-            peas.append(Pea())
+            peas.append(Pea(color: colors.randomItem()!))
         }
     }
     
@@ -78,8 +86,8 @@ class Flock: Codable {
     
     // Recolor peas from state
     func color() {
-        for pea in peas {
-            pea.color = CGColor.random()
+        for i in 0..<peas.count {
+            peas[i].color = CGColor.random()
         }
     }
     

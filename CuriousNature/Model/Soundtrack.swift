@@ -22,11 +22,11 @@ class Soundtrack {
     }
     
     func checkForNight() {
-        if ((Calendar.current.component(.hour, from: Date()) > 20 || Calendar.current.component(.hour, from: Date()) < 7) && !isNight) {
+        if ((Calendar.current.component(.hour, from: Date()) > 18 || Calendar.current.component(.hour, from: Date()) < 8) && !isNight) {
             playCrickets()
             player?.volume = 0.2
             isNight = true
-        } else if (Calendar.current.component(.hour, from: Date()) < 20 && Calendar.current.component(.hour, from: Date()) > 7 && isNight) {
+        } else if (Calendar.current.component(.hour, from: Date()) < 18 && Calendar.current.component(.hour, from: Date()) > 8 && isNight) {
             stopCrickets()
             player?.volume = 1.0
             isNight = false

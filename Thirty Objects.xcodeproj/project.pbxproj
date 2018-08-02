@@ -19,11 +19,12 @@
 		221244F820792CF4006DDFB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221244F620792CF4006DDFB1 /* Main.storyboard */; };
 		2212450F20792DAE006DDFB1 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2212450E20792DAE006DDFB1 /* Vector.swift */; };
 		222AA05E20E97F46007AD91E /* SerialCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AA05D20E97F46007AD91E /* SerialCommunicator.swift */; };
+		22621737210FE24300204E89 /* ORSSerial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DBC820EC084200AA079C /* ORSSerial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		228E4B95209F654300C5626E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B94209F654300C5626E /* Environment.swift */; };
 		228E4B9720A123B800C5626E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E4B9620A123B800C5626E /* Profile.swift */; };
 		229C53F92108003200D8F48E /* Crickets.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 229C53F72108003100D8F48E /* Crickets.mp3 */; };
 		229C53FA2108003200D8F48E /* Background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 229C53F82108003200D8F48E /* Background.mp3 */; };
-		22B9DBCB20EC086500AA079C /* ORSSerial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B9DBC820EC084200AA079C /* ORSSerial.framework */; };
+		229C53FC210F8F2F00D8F48E /* FlockProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C53FB210F8F2F00D8F48E /* FlockProperties.swift */; };
 		22D57E9220C439AE00FCE5E0 /* Soundtrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */; };
 		22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */; };
 		22EA74C920A87F09005B24C8 /* EnvironmentPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA74C820A87F09005B24C8 /* EnvironmentPrefsViewController.swift */; };
@@ -33,6 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		22621738210FE24300204E89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9DCA89111A2BB106009285EB;
+			remoteInfo = ORSSerial;
+		};
 		22B9DBC720EC084200AA079C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */;
@@ -48,6 +56,20 @@
 			remoteInfo = "ORSSerialPort Tests";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2262173A210FE24300204E89 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22621737210FE24300204E89 /* ORSSerial.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		220C770620793794005E2242 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
@@ -70,6 +92,7 @@
 		228E4B9620A123B800C5626E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		229C53F72108003100D8F48E /* Crickets.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Crickets.mp3; sourceTree = "<group>"; };
 		229C53F82108003200D8F48E /* Background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Background.mp3; sourceTree = "<group>"; };
+		229C53FB210F8F2F00D8F48E /* FlockProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockProperties.swift; sourceTree = "<group>"; };
 		22B9DBC220EC084200AA079C /* ORSSerialPort.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ORSSerialPort.xcodeproj; path = "Frameworks/ORSSerialPort/Framework Project/ORSSerialPort.xcodeproj"; sourceTree = "<group>"; };
 		22D57E9120C439AE00FCE5E0 /* Soundtrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soundtrack.swift; sourceTree = "<group>"; };
 		22EA74C620A87E8F005B24C8 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
@@ -84,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B9DBCB20EC086500AA079C /* ORSSerial.framework in Frameworks */,
 				220C770E207ECB83005E2242 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,6 +189,7 @@
 				228E4B94209F654300C5626E /* Environment.swift */,
 				220C770A20793EDA005E2242 /* Flock.swift */,
 				220C770820793EC9005E2242 /* Pea.swift */,
+				229C53FB210F8F2F00D8F48E /* FlockProperties.swift */,
 				2212450E20792DAE006DDFB1 /* Vector.swift */,
 				220C770F207FFC9A005E2242 /* ProcessKit.swift */,
 			);
@@ -201,10 +224,12 @@
 				221244EA20792CF3006DDFB1 /* Frameworks */,
 				221244EB20792CF3006DDFB1 /* Resources */,
 				228E4B9C20A2851200C5626E /* ShellScript */,
+				2262173A210FE24300204E89 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				22621739210FE24300204E89 /* PBXTargetDependency */,
 			);
 			name = "Thirty Objects";
 			productName = CuriousNature;
@@ -321,6 +346,7 @@
 				22EA74C920A87F09005B24C8 /* EnvironmentPrefsViewController.swift in Sources */,
 				22EA74C720A87E8F005B24C8 /* PrefsViewController.swift in Sources */,
 				222AA05E20E97F46007AD91E /* SerialCommunicator.swift in Sources */,
+				229C53FC210F8F2F00D8F48E /* FlockProperties.swift in Sources */,
 				228E4B9720A123B800C5626E /* Profile.swift in Sources */,
 				220C770720793794005E2242 /* Canvas.swift in Sources */,
 				220C770B20793EDA005E2242 /* Flock.swift in Sources */,
@@ -328,6 +354,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22621739210FE24300204E89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ORSSerial;
+			targetProxy = 22621738210FE24300204E89 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		221244F620792CF4006DDFB1 /* Main.storyboard */ = {
@@ -373,9 +407,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = LWHS65CZ4J;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -433,9 +468,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LWHS65CZ4J;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -462,7 +498,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FG88Y76FBG;
+				DEVELOPMENT_TEAM = LWHS65CZ4J;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = CuriousNature/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,7 +519,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FG88Y76FBG;
+				DEVELOPMENT_TEAM = LWHS65CZ4J;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = CuriousNature/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

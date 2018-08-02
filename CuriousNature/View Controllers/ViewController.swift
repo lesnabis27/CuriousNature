@@ -40,7 +40,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     lazy var environment = Environment()
     lazy var soundtrack = Soundtrack()
     var timer = Timer()
-    var mouseTimer = 0
+    var autosaveTimer = 0
     var mouseShouldBeHidden = false
 
     // MARK: - View stuff
@@ -155,6 +155,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     @objc func update(_: Timer) {
         serialCommunicator.pollingTimerFired()
+        serialCommunicator.triggerInteraction()
         print(serialCommunicator.sensorData)
         environment.update()
         canvas.update(from: environment.context)

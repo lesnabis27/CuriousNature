@@ -27,7 +27,7 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
     
     fileprivate func readDistance() {
         let command = "$DIST?;".data(using: String.Encoding.ascii)!
-        let responseDescriptor = ORSSerialPacketDescriptor(prefixString: "!DIST", suffixString: ";", maximumPacketLength: 10, userInfo: nil)
+        let responseDescriptor = ORSSerialPacketDescriptor(prefixString: "!DIST", suffixString: ";", maximumPacketLength: 40, userInfo: nil)
         let request = ORSSerialRequest(dataToSend: command, userInfo: SerialBoardRequestType.readDistance.rawValue, timeoutInterval: 0.5, responseDescriptor: responseDescriptor)
         self.serialPort?.send(request)
     }
@@ -40,9 +40,16 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
             print("Invalid serial data")
             return
         }
-        let idString = dataAsString.substring(with: NSRange(location: 5, length: 1))
-        let distanceString = dataAsString.substring(with: NSRange(location: 6, length: dataAsString.length - 7))
-        sensorData[Int(idString)!] = Int(distanceString)!
+        
+        let distanceString = dataAsString.substring(with: NSRange(location: 5, length: dataAsString.length - 6))
+        let distanceArray = distanceString.components(separatedBy: ".")
+        for i in 0..<distanceArray.count {
+            sensorData[i] = Int(distanceArray[i])!
+        }
+        
+//        let idString = dataAsString.substring(with: NSRange(location: 5, length: 1))
+//        let distanceString = dataAsString.substring(with: NSRange(location: 6, length: dataAsString.length - 7))
+//        sensorData[Int(idString)!] = Int(distanceString)!
     }
     
     // MARK: - ORSSerialPortDelegate
@@ -71,9 +78,69 @@ class SerialCommunicator: NSObject, ORSSerialPortDelegate {
         return
     }
     
+    // MARK: - Input Monitoring
+    
+    func checkIfInRange() -> Bool {
+        var anyInRange = false
+        for i in 0..<sensorData.count {
+            if sensorData[i] <= sensorRange && sensorData[i] > 0 {
+                sensorInRange[i] = true
+                anyInRange = true
+            } else {
+                sensorInRange[i] = false
+            }
+        }
+        return anyInRange
+    }
+    
+    func triggerInteraction() {
+        if averageSensorInput != 0 {
+            if averageSensorInput <= sensorRange {
+                //allTriggerState.setState()
+                if (state.activeRange < 300) {
+                    state.activeRange += 1
+                    state.activeRangeSquared = state.activeRange * state.activeRange
+                }
+            } else if checkIfInRange() {
+                //singleTriggerState.setState()
+                if (state.activeRange < 100) {
+                    state.activeRange += 3
+                    state.activeRangeSquared = state.activeRange * state.activeRange
+                }
+            } else {
+                //defaultState.setState()
+                if (state.activeRange > 75) {
+                    state.activeRange -= 2
+                    state.activeRangeSquared = state.activeRange * state.activeRange
+                }
+            }
+            print(state.activeRange)
+        }
+    }
+    
     // MARK: - Properties
     
     var sensorData: [Int] = [0, 0, 0, 0, 0]
+    var sensorInRange: [Bool] = [false, false, false, false, false]
+    let sensorRange = 200
+    var defaultState = FlockProperties()
+    var singleTriggerState = FlockProperties(sep: 2.0, ali: 0.0, coh: 1.0)
+    var allTriggerState = FlockProperties(sep: 3.0, ali: -1.0, coh: 1.0)
+    
+    lazy var averageSensorInput: Int = {
+        let sum = sensorData.reduce(0, +)
+        var count = 0
+        for i in 0..<sensorData.count {
+            if sensorData[i] > 0 {
+                count += 1
+            }
+        }
+        if count != 0 {
+            return sum / count
+        } else {
+            return 400
+        }
+    }()
     
     var serialPort: ORSSerialPort? {
         willSet {

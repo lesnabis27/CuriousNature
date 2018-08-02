@@ -15,7 +15,7 @@ class ProfilePrefsViewController: NSViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var serialPortsPopUp: NSPopUpButton!
     @IBOutlet weak var autosaveFramesCheckbox: NSButton!
-    @IBOutlet weak var autosaveFramesPathControl: NSPathControl!
+    @IBOutlet weak var autosavePathTextField: NSTextField!
     
     // MARK: - IBActions
     @IBAction func serialPortPopUpChanged(_ sender: NSPopUpButton) {
@@ -23,7 +23,7 @@ class ProfilePrefsViewController: NSViewController {
     }
     @IBAction func autosaveFramesCheckboxChanged(_ sender: NSButton) {
     }
-    @IBAction func autosaveFramesPathControlChanged(_ sender: NSPathControl) {
+    @IBAction func autosavePathTextFieldChanged(_ sender: NSTextField) {
     }
     
     override func viewDidLoad() {
@@ -36,7 +36,6 @@ class ProfilePrefsViewController: NSViewController {
                 serialPortsPopUp.selectItem(withTitle: currentPort.name)
             }
         }
-        
     }
     
 }

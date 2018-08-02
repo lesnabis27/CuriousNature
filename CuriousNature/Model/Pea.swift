@@ -12,7 +12,7 @@
 
 import Cocoa
 
-class Pea: Codable {
+class Pea {
     
     // MARK: - Properties
     
@@ -23,50 +23,17 @@ class Pea: Codable {
 
     // MARK: - Initializers
     
-    init(atX x: CGFloat, andY y: CGFloat) {
+    init(atX x: CGFloat, andY y: CGFloat, color: CGColor) {
         loc = [x, y]
         ploc = [x, y]
         vel = Vector.random2D()
         acc = [0, 0]
         depth = CGFloat.random(from: state.minDepth, to: state.maxDepth)
-        color = CGColor.random()
+        self.color = color
         currentInteractions = 0
     }
-    
-    convenience init() {
-        self.init(atX: PK.randomCGFloat(upTo: state.xResolution), andY: PK.randomCGFloat(upTo: state.yResolution))
-    }
-    
-    // MARK: - Encoding
-    
-    enum CodingKeys: String, CodingKey {
-        case loc
-        case ploc
-        case vel
-        case acc
-        case depth
-        case color
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        loc = try values.decode(Vector.self, forKey: .loc)
-        ploc = try values.decode(Vector.self, forKey: .ploc)
-        vel = try values.decode(Vector.self, forKey: .vel)
-        acc = try values.decode(Vector.self, forKey: .acc)
-        depth = try values.decode(CGFloat.self, forKey: .depth)
-        color = CGColor.random() // FIX
-        currentInteractions = 0
-    }
-    
-    // Some properties are easily recalculated and don't need to be encoded
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(loc, forKey: .loc)
-        try container.encode(ploc, forKey: .ploc)
-        try container.encode(vel, forKey: .vel)
-        try container.encode(acc, forKey: .acc)
-        try container.encode(depth, forKey: .depth)
+    convenience init(color: CGColor) {
+        self.init(atX: PK.randomCGFloat(upTo: state.xResolution), andY: PK.randomCGFloat(upTo: state.yResolution), color: color)
     }
     
     // MARK: - Motion

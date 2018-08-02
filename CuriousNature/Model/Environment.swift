@@ -12,7 +12,7 @@ import Cocoa
 
 let state = Profile()
 
-class Environment: Codable {
+class Environment {
     
     // MARK: - Properties
     
@@ -37,30 +37,6 @@ class Environment: Codable {
         
         // Visual setup
         PK.background(in: context!)
-    }
-    
-    // MARK: - Enoding
-    
-    enum CodingKeys: String, CodingKey {
-        case flock
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        flock = try values.decode(Flock.self, forKey: .flock)
-        context = CGContext(
-            data: nil,
-            width: Int(state.xResolution),
-            height: Int(state.yResolution),
-            bitsPerComponent: 8,
-            bytesPerRow: 0,
-            space: CGColorSpaceCreateDeviceRGB(),
-            bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(flock, forKey: .flock)
     }
     
     // MARK: - Update
